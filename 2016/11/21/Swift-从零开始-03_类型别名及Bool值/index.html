@@ -6,17 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Chen bin</title>
+  <title>Swift 从零开始 -03 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chen bin">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
+当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
+1typealias AudioSample = UInt16
+定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
+12var maxAmplitudeFoun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 从零开始 -03">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-03_类型别名及Bool值/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta property="og:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
+当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
+1typealias AudioSample = UInt16
+定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
+12var maxAmplitudeFoun">
+<meta property="og:updated_time" content="2016-11-21T05:29:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chen bin">
-<meta name="twitter:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta name="twitter:title" content="Swift 从零开始 -03">
+<meta name="twitter:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
+当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
+1typealias AudioSample = UInt16
+定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
+12var maxAmplitudeFoun">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -139,157 +152,104 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-Swift-从零开始-03_类型别名及Bool值" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-04-可选项/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:45:06.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-04-可选项/">Swift 从零开始 -04_可选项</a>
+    <h1 class="article-title" itemprop="name">
+      Swift 从零开始 -03
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h1><p>类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
+<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typealias AudioSample = UInt16</div></pre></td></tr></table></figure>
+<p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var maxAmplitudeFound = AudioSample.min</div><div class="line">// maxAmplitudeFound 现在是 0</div></pre></td></tr></table></figure>
+<p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
+<h1 id="Bool值"><a href="#Bool值" class="headerlink" title="Bool值"></a>Bool值</h1><p>Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的（logical），因为它们只能是真或者假。Swift 有两个布尔常量，true和false：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let orangesAreOrange = true</div><div class="line">let turnipsAreDelicious = false</div></pre></td></tr></table></figure>
+<p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if turnipsAreDelicious &#123;</div><div class="line">    println(&quot;Mmm, tasty turnips!&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    println(&quot;Eww, turnips are horrible.&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;Eww, turnips are horrible.&quot;</div></pre></td></tr></table></figure>
+<p>条件语句，例如if，请参考控制流。</p>
+<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i &#123;</div><div class="line">    // 这个例子不会通过编译，会报错</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然而，下面的例子是合法的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i == 1 &#123;</div><div class="line">    // 这个例子会编译成功</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
+<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</p>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
   	<time datetime="2016-11-21T05:24:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/">Swift 从零开始 -03</a>
-    </h1>
-  
+      
+      
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:41:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/">Swift 从零开始 -02</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+  
+<nav id="article-nav">
+  
+    <a href="/2016/11/21/Swift-从零开始-04-可选项/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Swift 从零开始 -04_可选项
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 -02</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-01_单例/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:10:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-01_单例/">Swift 从零开始 -01</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/关于博客/" class="archive-article-date">
-  	<time datetime="2016-11-21T02:53:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/关于博客/">关于博客</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
 
 
       </div>
@@ -312,8 +272,8 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
