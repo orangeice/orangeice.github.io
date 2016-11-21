@@ -6,17 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016 | Chen bin</title>
+  <title>Swift 从零开始 06_断言 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chen bin">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="断言例断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效
+
+
+1NSAssert(self.finishedBlock != nil, @&amp;quot;图片下载完成的回调(finishedBlock)不能为空&amp;quot;);
+可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 从零开始 06_断言">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-06_断言/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta property="og:description" content="断言例断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效
+
+
+1NSAssert(self.finishedBlock != nil, @&amp;quot;图片下载完成的回调(finishedBlock)不能为空&amp;quot;);
+可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续">
+<meta property="og:updated_time" content="2016-11-21T06:35:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chen bin">
-<meta name="twitter:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta name="twitter:title" content="Swift 从零开始 06_断言">
+<meta name="twitter:description" content="断言例断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效
+
+
+1NSAssert(self.finishedBlock != nil, @&amp;quot;图片下载完成的回调(finishedBlock)不能为空&amp;quot;);
+可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -139,211 +152,93 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-Swift-从零开始-06_断言" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
+    <h1 class="article-title" itemprop="name">
+      Swift 从零开始 06_断言
+    </h1>
   
+
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
+        <h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><font color="orangered">断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效</font>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAssert(self.finishedBlock != nil, @&quot;图片下载完成的回调(finishedBlock)不能为空&quot;);</div></pre></td></tr></table></figure>
+<p>可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续执行。这时，你可以在你的代码中触发一个断言（assertion）来结束代码运行并通过调试来找到值缺失的原因。</p>
+<h3 id="使用断言进行调试"><a href="#使用断言进行调试" class="headerlink" title="使用断言进行调试"></a>使用断言进行调试</h3><p>断言会在运行时判断一个逻辑条件是否为true。从字面意思来说，断言“断言”一个条件是否为真。你可以使用断言来保证在运行其他代码之前，某些重要的条件已经被满足。如果条件判断为true，代码运行会继续进行；如果条件判断为false，代码运行停止，你的应用被终止。</p>
+<p>如果你的代码在调试环境下触发了一个断言，比如你在 Xcode 中构建并运行一个应用，你可以清楚地看到不合法的状态发生在哪里并检查断言被触发时你的应用的状态。此外，断言允许你附加一条调试信息。</p>
+<p>你可以使用全局assert函数来写一个断言。向assert函数传入一个结果为true或者false的表达式以及一条信息，当表达式为false的时候这条信息会被显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let age = -3</div><div class="line">assert(age &gt;= 0, &quot;A person&apos;s age cannot be less than zero&quot;)</div><div class="line">// 因为 age &lt; 0，所以断言会触发</div></pre></td></tr></table></figure>
+<p>在这个例子中，只有age &gt;= 0为true的时候，即age的值非负的时候，代码运行才会继续。如果age的值是负数，就像代码中那样，age &gt;= 0为false，断言被触发，结束应用。</p>
+<p>断言信息如果不需要，可以被省略，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert(age &gt;= 0)</div></pre></td></tr></table></figure>
+<h3 id="何时使用断言"><a href="#何时使用断言" class="headerlink" title="何时使用断言"></a>何时使用断言</h3><p>当条件可能为假时使用断言，但是最终一定要保证条件为真，这样你的代码才能继续运行。断言的适用情景：</p>
+<p>整数类型的下标索引被传入一个自定义下标脚本实现，但是下标索引值可能太小或者太大。<br>需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。<br>一个可选值现在是nil，但是后面的代码运行需要一个非nil值。<br>请参考下标脚本和函数。</p>
+<p>注意：<br>断言可能导致你的应用终止运行，所以你应当仔细设计你的代码来让非法条件不会出现。然而，在你的应用发布之前，有时候非法条件可能出现，这时使用断言可以快速发现问题。</p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-06_断言/" class="archive-article-date">
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/21/Swift-从零开始-06_断言/" class="archive-article-date">
   	<time datetime="2016-11-21T06:28:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-06_断言/">Swift 从零开始 06_断言</a>
-    </h1>
-  
+      
+      
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:16:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-05_if let 与 guard/">Swift 从零开始 05_if let 与 guard</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 05_if let 与 guard</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-04_可选项/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:45:06.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-04_可选项/">Swift 从零开始 -04_可选项</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:24:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/">Swift 从零开始 -03</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:41:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/">Swift 从零开始 -02</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Swift-从零开始-01_单例/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:10:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Swift-从零开始-01_单例/">Swift 从零开始 -01</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/关于博客/" class="archive-article-date">
-  	<time datetime="2016-11-21T02:53:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/关于博客/">关于博客</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
       </div>
@@ -366,8 +261,8 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

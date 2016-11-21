@@ -6,30 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Swift 从零开始 -03 | Chen bin</title>
+  <title>Swift 从零开始 05_if let 与 guard | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
-当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
-定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
+  <meta name="description" content="Swift控制流: 如何理解 if let 与guard?if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。
+if let12345678func doSomething(str: String?)&amp;#123;    let v: String! = str    if v != nil">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 从零开始 -03">
-<meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-03_类型别名及Bool值/index.html">
+<meta property="og:title" content="Swift 从零开始 05_if let 与 guard">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-05_if let 与 guard/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
-当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
-定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
-<meta property="og:updated_time" content="2016-11-21T05:29:46.000Z">
+<meta property="og:description" content="Swift控制流: 如何理解 if let 与guard?if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。
+if let12345678func doSomething(str: String?)&amp;#123;    let v: String! = str    if v != nil">
+<meta property="og:updated_time" content="2016-11-21T06:27:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 从零开始 -03">
-<meta name="twitter:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
-当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
-定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
+<meta name="twitter:title" content="Swift 从零开始 05_if let 与 guard">
+<meta name="twitter:description" content="Swift控制流: 如何理解 if let 与guard?if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。
+if let12345678func doSomething(str: String?)&amp;#123;    let v: String! = str    if v != nil">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -152,7 +143,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Swift-从零开始-03_类型别名及Bool值" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-05_if let 与 guard" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -162,7 +153,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Swift 从零开始 -03
+      Swift 从零开始 05_if let 与 guard
     </h1>
   
 
@@ -170,30 +161,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h1><p>类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
-<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typealias AudioSample = UInt16</div></pre></td></tr></table></figure>
-<p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var maxAmplitudeFound = AudioSample.min</div><div class="line">// maxAmplitudeFound 现在是 0</div></pre></td></tr></table></figure>
-<p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
-<h1 id="Bool值"><a href="#Bool值" class="headerlink" title="Bool值"></a>Bool值</h1><p>Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的（logical），因为它们只能是真或者假。Swift 有两个布尔常量，true和false：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let orangesAreOrange = true</div><div class="line">let turnipsAreDelicious = false</div></pre></td></tr></table></figure>
-<p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if turnipsAreDelicious &#123;</div><div class="line">    println(&quot;Mmm, tasty turnips!&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    println(&quot;Eww, turnips are horrible.&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;Eww, turnips are horrible.&quot;</div></pre></td></tr></table></figure>
-<p>条件语句，例如if，请参考控制流。</p>
-<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i &#123;</div><div class="line">    // 这个例子不会通过编译，会报错</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然而，下面的例子是合法的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i == 1 &#123;</div><div class="line">    // 这个例子会编译成功</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
-<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</p>
-
+        <h1 id="Swift控制流-如何理解-if-let-与guard"><a href="#Swift控制流-如何理解-if-let-与guard" class="headerlink" title="Swift控制流: 如何理解 if let 与guard?"></a>Swift控制流: 如何理解 if let 与guard?</h1><p>if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。</p>
+<h3 id="if-let"><a href="#if-let" class="headerlink" title="if let"></a>if let</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    let v: String! = str</div><div class="line">    if v != nil</div><div class="line">    &#123;</div><div class="line">        // use v to do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Swift 中因为有optional, 经常需要判断是否为空。假如没有if let，大致写成上面的样子，有了 if let, 可以改写成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    if let v = str</div><div class="line">    &#123;</div><div class="line">        // use v to do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面两段代码的控制流是一样的。对照着，可以看出if let的写法更加简洁方便。</p>
+<hr>
+<h3 id="guard"><a href="#guard" class="headerlink" title="guard"></a>guard</h3><p>假如 if 中出现的代码很长，我们写代码时可以将错误情况先返回。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    let v: String! = str</div><div class="line">    if v == nil</div><div class="line">    &#123;</div><div class="line">        return</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // use v to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样做可以避免过多的嵌套。上面代码实在太常见了，swift也提供一个guard这个语法糖，用guard可以改写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    guard let v = str else &#123; return &#125;</div><div class="line"></div><div class="line">    // use v to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面两段代码的控制流是一样的。也可以看出guard的写法更加简洁方便。</p>
+<h5 id="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"><a href="#if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强" class="headerlink" title="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"></a><font color="red">if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强</font></h5>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:24:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+      <a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" class="archive-article-date">
+  	<time datetime="2016-11-21T06:16:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
 </a>
       
       
@@ -206,18 +191,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/21/Swift-从零开始-04_可选项/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/11/21/Swift-从零开始-06_断言/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Swift 从零开始 -04_可选项
+          Swift 从零开始 06_断言
         
       </div>
     </a>
   
   
-    <a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swift 从零开始 -02</div>
+    <a href="/2016/11/21/Swift-从零开始-04_可选项/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 -04_可选项</div>
       <i class="icon-circle-right"></i>
     </a>
   
