@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Chen bin</title>
+  <title>Swift 从零开始 07_swift中的关键字说明(一) | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chen bin">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
+12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 从零开始 07_swift中的关键字说明(一)">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-07-swift中的关键字说明/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta property="og:description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
+12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
+<meta property="og:updated_time" content="2016-11-21T08:50:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chen bin">
-<meta name="twitter:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta name="twitter:title" content="Swift 从零开始 07_swift中的关键字说明(一)">
+<meta name="twitter:description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
+12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -135,9 +139,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-Swift-从零开始-07-swift中的关键字说明" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-07-swift中的关键字说明" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,8 +148,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-07-swift中的关键字说明/">Swift 从零开始 07_swift中的关键字说明(一)</a>
+    <h1 class="article-title" itemprop="name">
+      Swift 从零开始 07_swift中的关键字说明(一)
     </h1>
   
 
@@ -239,420 +241,44 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Swift-从零开始-06_断言" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-06_断言/">Swift 从零开始 06_断言</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><font color="orangered">断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效</font>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAssert(self.finishedBlock != nil, @&quot;图片下载完成的回调(finishedBlock)不能为空&quot;);</div></pre></td></tr></table></figure>
-<p>可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续执行。这时，你可以在你的代码中触发一个断言（assertion）来结束代码运行并通过调试来找到值缺失的原因。</p>
-<h3 id="使用断言进行调试"><a href="#使用断言进行调试" class="headerlink" title="使用断言进行调试"></a>使用断言进行调试</h3><p>断言会在运行时判断一个逻辑条件是否为true。从字面意思来说，断言“断言”一个条件是否为真。你可以使用断言来保证在运行其他代码之前，某些重要的条件已经被满足。如果条件判断为true，代码运行会继续进行；如果条件判断为false，代码运行停止，你的应用被终止。</p>
-<p>如果你的代码在调试环境下触发了一个断言，比如你在 Xcode 中构建并运行一个应用，你可以清楚地看到不合法的状态发生在哪里并检查断言被触发时你的应用的状态。此外，断言允许你附加一条调试信息。</p>
-<p>你可以使用全局assert函数来写一个断言。向assert函数传入一个结果为true或者false的表达式以及一条信息，当表达式为false的时候这条信息会被显示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let age = -3</div><div class="line">assert(age &gt;= 0, &quot;A person&apos;s age cannot be less than zero&quot;)</div><div class="line">// 因为 age &lt; 0，所以断言会触发</div></pre></td></tr></table></figure>
-<p>在这个例子中，只有age &gt;= 0为true的时候，即age的值非负的时候，代码运行才会继续。如果age的值是负数，就像代码中那样，age &gt;= 0为false，断言被触发，结束应用。</p>
-<p>断言信息如果不需要，可以被省略，就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert(age &gt;= 0)</div></pre></td></tr></table></figure>
-<h3 id="何时使用断言"><a href="#何时使用断言" class="headerlink" title="何时使用断言"></a>何时使用断言</h3><p>当条件可能为假时使用断言，但是最终一定要保证条件为真，这样你的代码才能继续运行。断言的适用情景：</p>
-<p>整数类型的下标索引被传入一个自定义下标脚本实现，但是下标索引值可能太小或者太大。<br>需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。<br>一个可选值现在是nil，但是后面的代码运行需要一个非nil值。<br>请参考下标脚本和函数。</p>
-<p>注意：<br>断言可能导致你的应用终止运行，所以你应当仔细设计你的代码来让非法条件不会出现。然而，在你的应用发布之前，有时候非法条件可能出现，这时使用断言可以快速发现问题。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-06_断言/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:28:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-05_if let 与 guard" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-05_if let 与 guard/">Swift 从零开始 05_if let 与 guard</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift控制流-如何理解-if-let-与guard"><a href="#Swift控制流-如何理解-if-let-与guard" class="headerlink" title="Swift控制流: 如何理解 if let 与guard?"></a>Swift控制流: 如何理解 if let 与guard?</h1><p>if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。</p>
-<h3 id="if-let"><a href="#if-let" class="headerlink" title="if let"></a>if let</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    let v: String! = str</div><div class="line">    if v != nil</div><div class="line">    &#123;</div><div class="line">        // use v to do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Swift 中因为有optional, 经常需要判断是否为空。假如没有if let，大致写成上面的样子，有了 if let, 可以改写成:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    if let v = str</div><div class="line">    &#123;</div><div class="line">        // use v to do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面两段代码的控制流是一样的。对照着，可以看出if let的写法更加简洁方便。</p>
-<hr>
-<h3 id="guard"><a href="#guard" class="headerlink" title="guard"></a>guard</h3><p>假如 if 中出现的代码很长，我们写代码时可以将错误情况先返回。比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    let v: String! = str</div><div class="line">    if v == nil</div><div class="line">    &#123;</div><div class="line">        return</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // use v to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样做可以避免过多的嵌套。上面代码实在太常见了，swift也提供一个guard这个语法糖，用guard可以改写成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">func doSomething(str: String?)</div><div class="line">&#123;</div><div class="line">    guard let v = str else &#123; return &#125;</div><div class="line"></div><div class="line">    // use v to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面两段代码的控制流是一样的。也可以看出guard的写法更加简洁方便。</p>
-<h5 id="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"><a href="#if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强" class="headerlink" title="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"></a><font color="red">if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强</font></h5>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:16:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-04_可选项" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-04_可选项/">Swift 从零开始 04_可选项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="可选项的定义"><a href="#可选项的定义" class="headerlink" title="可选项的定义"></a>可选项的定义</h1><p>Optional也是Objective-C没有的数据类型，是苹果引入到Swift语言中的全新类型，它的特点就和它的名字一样：可以有值，也可以没有值，当它没有值时，就是nil。此外，Swift的nil也和Objective-C有些不一样，在Objective-C中，只有对象才能为nil，而在Swift里，当基础类型（整形、浮点、布尔等）没有值时，也是nil，而不是一个初始值，没有初始值的值，是不能使用的，这就产生了Optional类型。定义一个Optional的值很容易，只需要在类型后面加上问号(?)就行了，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var str: String?</div></pre></td></tr></table></figure>
-<p>一个Optional值和非Optional值的区别就在于：Optional值未经初始化虽然为nil，但普通变量连nil都没有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//未被初始化，但是是一个Optional类型，为nil</div><div class="line">var str: String?</div><div class="line">str //输出nil</div><div class="line">//未被初始化，也不是Optional类型</div><div class="line">var str2: String</div><div class="line">str2    //使用时出错</div></pre></td></tr></table></figure>
-<h1 id="可选项的拆包"><a href="#可选项的拆包" class="headerlink" title="可选项的拆包"></a>可选项的拆包</h1><h3 id="显式拆包"><a href="#显式拆包" class="headerlink" title="显式拆包"></a>显式拆包</h3><p>Optional类型的值不能被直接使用，当需要用时要显式拆包，以表明我知道这个Optional是一定有值的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var str: String? = &quot;Hello World!&quot;</div><div class="line">str! //Hello World!</div></pre></td></tr></table></figure>
-<p>对比拆包前后，对str的输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var str: String? = &quot;Hello World!&quot;</div><div class="line">str     //&#123;Some &quot;Hello World!&quot;&#125;</div><div class="line">str!    //Hello World!</div></pre></td></tr></table></figure>
-<p>之所以要拆包使用，是因为Optional类型其实是一个枚举：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">enum Optional&lt;T&gt; : Reflectable, NilLiteralConvertible &#123;</div><div class="line">    case None</div><div class="line">    case Some(T)</div><div class="line">    init()</div><div class="line">    init(_ some: T)</div><div class="line"></div><div class="line">    /// Haskell&apos;s fmap, which was mis-named</div><div class="line">    func map&lt;U&gt;(f: (T) -&gt; U) -&gt; U?</div><div class="line">    func getMirror() -&gt; MirrorType</div><div class="line">    static func convertFromNilLiteral() -&gt; T?</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当Optional没有值时，返回的nil其实就是Optional.None，即没有值。除了None以外，还有一个Some，当有值时就是被Some<t>包装的真正的值，所以我们拆包的动作其实就是将Some里面的值取出来。<br>有没有似曾相识的感觉？Java里面也有泛型。</t></p>
-<h3 id="隐式拆包"><a href="#隐式拆包" class="headerlink" title="隐式拆包"></a>隐式拆包</h3><p>除了显式拆包，Optional还提供了隐式拆包，通过在声明时的数据类型后面加一个感叹号(!)来实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var str: String! = &quot;Hello World!&quot;</div><div class="line">str //Hello World!</div></pre></td></tr></table></figure>
-<p>可以看到没有使用(?)进行显式的折包也得到了Some中的值，这个语法相当于告诉编译器：在我们使用Optional值前，这个Optional值就会被初始化，并且总是会有值，所以当我们使用时，编译器就帮我做了一次拆包。如果你确信你的变量能保证被正确初始化，那就可以这么做，否则还是不要尝试为好。</p>
-<h5 id="另外：在上面可以看到，Optional其实就是一个枚举，然后给它指定一个类型就行了，所以下面这两种方法都能声明一个Optional值："><a href="#另外：在上面可以看到，Optional其实就是一个枚举，然后给它指定一个类型就行了，所以下面这两种方法都能声明一个Optional值：" class="headerlink" title="另外：在上面可以看到，Optional其实就是一个枚举，然后给它指定一个类型就行了，所以下面这两种方法都能声明一个Optional值："></a>另外：在上面可以看到，Optional其实就是一个枚举，然后给它指定一个类型就行了，所以下面这两种方法都能声明一个Optional值：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var str: String! = &quot;Hello World!&quot;</div><div class="line">var str2: Optional&lt;String&gt;</div></pre></td></tr></table></figure>
-<h1 id="Optional-Binding"><a href="#Optional-Binding" class="headerlink" title="Optional Binding"></a>Optional Binding</h1><p>在说Optional Binding之前，我想先说下Xcode6 Beta5在这一版中的一个小变化：在Xcode6 Beta5之前，如果是一个Optional值，可以直接放到条件判断语句中，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var str: String? = &quot;Hello World!&quot;</div><div class="line">if str &#123;</div><div class="line">    &quot;not nil&quot;</div><div class="line">&#125; else &#123;</div><div class="line">    &quot;nil&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果不是nil，则右边的Playground会显示“not nil”；反之则显示“nil”，但是至Xcode6 Beta5开始，这样就不能通过编译器了，你需要用下面这种方式来代替：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var str: String? = &quot;Hello World!&quot;</div><div class="line">if str != nil &#123;</div><div class="line">    &quot;not nil&quot;</div><div class="line">&#125; else &#123;</div><div class="line">    &quot;nil&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看似合理，但是在某种情况下会非常不爽难过，比如你在str != nil条件成真后接着在上下文中使用str，会被要求进行拆包，我们以一个Int类型的Optional来做示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var count: Int?</div><div class="line">count = 100</div><div class="line">if count != nil &#123;</div><div class="line">    &quot;count is &quot; + String(count!)    //count is 100</div><div class="line">&#125; else &#123;</div><div class="line">    &quot;nil&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我在把count强转成String的时候被要求拆包了，这是因为count本身是一个Optional的类型，为了避免在条件判断语句后执行一次或更多次的拆包，Swift引进了Optional Binding，我们就可以这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var count: Int?</div><div class="line">count = 100</div><div class="line">if let validCount = count &#123;</div><div class="line">    &quot;count is &quot; + String(validCount)    //count is 100</div><div class="line">&#125; else &#123;</div><div class="line">    &quot;nil&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过在条件判断语句中（如if、while等）把Optional值直接给一个临时常量，Swift会自动检测Optional是否包含值，如果包含值，会隐式的拆包并给那个临时常量，在接下来的上下文中就能直接使用这个临时常量了，这样是不是就觉得很爽呢微笑</p>
-<h5 id="注：在Optional-Binding中，除了以常量的方式去接收拆包的值之外，也能以一个变量的形式去接收，但相信在大多数情况下我们只是使用那个值就行了，并不会去改变它。"><a href="#注：在Optional-Binding中，除了以常量的方式去接收拆包的值之外，也能以一个变量的形式去接收，但相信在大多数情况下我们只是使用那个值就行了，并不会去改变它。" class="headerlink" title="注：在Optional Binding中，除了以常量的方式去接收拆包的值之外，也能以一个变量的形式去接收，但相信在大多数情况下我们只是使用那个值就行了，并不会去改变它。"></a>注：在Optional Binding中，除了以常量的方式去接收拆包的值之外，也能以一个变量的形式去接收，但相信在大多数情况下我们只是使用那个值就行了，并不会去改变它。</h5><h4 id="Swift-1-2-新语法："><a href="#Swift-1-2-新语法：" class="headerlink" title="Swift 1.2 新语法："></a><font color="red">Swift 1.2 新语法：</font></h4><p>在if let 中可以使用条件判断了： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var a: NSString?</div><div class="line">a = &quot;test&quot;</div><div class="line">if let b = a &#123;</div><div class="line">    b</div><div class="line">&#125;</div><div class="line"></div><div class="line">if true, let b = a where b == &quot;test&quot; &#123;</div><div class="line">    &quot;true&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果a 不是”test”，则不会打印出”true”。</p>
-<h1 id="Optional-Chaining"><a href="#Optional-Chaining" class="headerlink" title="Optional Chaining"></a>Optional Chaining</h1><p>Optional Chaining对Swift来说是很基本但又必不可少的东西，相对于简单类型(Int、String等)来说，Optional更主要的应用场景是在复杂对象上，当一个对象包含另一个对象，同时这两个对象都有可能为nil的情况下才是Optional派上用场的地方，在Objective-C里，向nil发消息得到的就是一个nil，但是Swift不能在nil上直接调用方法或属性，同时为了方便我们使用，从而引入了Optional类型，可是这还不够，我们做一个简单的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">    var pet: Pet?</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Pet &#123;</div><div class="line">    var name: String</div><div class="line">    </div><div class="line">    var favoriteToy: Toy?</div><div class="line">    </div><div class="line">    init (name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Toy &#123;</div><div class="line">    var name: String</div><div class="line">    </div><div class="line">    init (name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一个Person对象代表一个人，这个人可能有一个宠物，宠物会有它自己的名字，而且宠物可能会有自己喜爱的玩具，按照前面提到的知识，我们要首先判断这个人有没有宠物，然后再判断他的宠物有没有喜爱的玩具，然后才能得到这个玩具的名称，利用Optional Binding，我们写出来的可能就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let jackon = Person()</div><div class="line">jackon.pet = Pet(name: &quot;Max&quot;)</div><div class="line">jackon.pet?.favoriteToy = Toy(name: &quot;Ball&quot;)</div><div class="line">if let pet = jackon.pet &#123;</div><div class="line">    if let toy = pet.favoriteToy &#123;</div><div class="line">        toy.name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里用到了两个if，因为pet和toy对象都可能为nil，我们需要预防每一个可能为nil的对象，如果这个对象再复杂一点，那if也就更多了，而使用Optional Chaining的话，写出来的就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let jackon = Person()</div><div class="line">jackon.pet = Pet(name: &quot;Max&quot;)</div><div class="line">jackon.pet?.favoriteToy = Toy(name: &quot;Ball&quot;)</div><div class="line">if let toy = jackon.pet?.favoriteToy &#123;</div><div class="line">    toy.name</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当一个Optional值调用它的另一个Optional值的时候，Optional Chaining就形成了，基本上，Optional Chaining就是总是返回一个Optional的值，只要这个Chaining中有一个值为nil，整条Chaining就为nil，和Objective-C的向nil发消息类似。<br>有一点很有趣，就是Optional Chaining除了能将属性返回的类型变为Optional外，连方法的返回值都能强制变为Optional，哪怕这个方法没有返回值，但是别忘了，Void也算是一个类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typealias Void = ()</div></pre></td></tr></table></figure>
-<p>如果我们的Pet类有一个玩玩具的play方法的话，就可以这样来判断是否会调用成功：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if let p: Void = jackon.pet?.play() &#123;</div><div class="line">    &quot;play is called&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用Optional Chaining，能使我们的代码变得更加可读，同时更加简洁。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-04_可选项/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:45:06.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-03_类型别名及Bool值" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/">Swift 从零开始 03_类型别名及Bool值</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h1><p>类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
-<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typealias AudioSample = UInt16</div></pre></td></tr></table></figure>
-<p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var maxAmplitudeFound = AudioSample.min</div><div class="line">// maxAmplitudeFound 现在是 0</div></pre></td></tr></table></figure>
-<p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
-<h1 id="Bool值"><a href="#Bool值" class="headerlink" title="Bool值"></a>Bool值</h1><p>Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的（logical），因为它们只能是真或者假。Swift 有两个布尔常量，true和false：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let orangesAreOrange = true</div><div class="line">let turnipsAreDelicious = false</div></pre></td></tr></table></figure>
-<p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if turnipsAreDelicious &#123;</div><div class="line">    println(&quot;Mmm, tasty turnips!&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    println(&quot;Eww, turnips are horrible.&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;Eww, turnips are horrible.&quot;</div></pre></td></tr></table></figure>
-<p>条件语句，例如if，请参考控制流。</p>
-<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i &#123;</div><div class="line">    // 这个例子不会通过编译，会报错</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然而，下面的例子是合法的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i == 1 &#123;</div><div class="line">    // 这个例子会编译成功</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
-<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:24:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-02_常量,变量及类型标注" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/">Swift 从零开始 02_常量,变量及类型标注</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="声明常量-变量以及类型标注"><a href="#声明常量-变量以及类型标注" class="headerlink" title="声明常量,变量以及类型标注"></a>声明常量,变量以及类型标注</h2><h4 id="常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数："><a href="#常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：" class="headerlink" title="常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数："></a>常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let maximumNumberOfLoginAttempts = 10</div><div class="line">var currentLoginAttempt = 0</div></pre></td></tr></table></figure>
-<h4 id="这两行代码可以被理解为："><a href="#这两行代码可以被理解为：" class="headerlink" title="这两行代码可以被理解为："></a>这两行代码可以被理解为：</h4><p>“声明一个名字是maximumNumberOfLoginAttempts的新常量，并给它一个值10。然后，声明一个名字是currentLoginAttempt的变量并将它的值初始化为0.”</p>
-<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
-<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var x = 0.0, y = 0.0, z = 0.0</div></pre></td></tr></table></figure></p>
-<p>注意：<br>如果你的代码中有不需要改变的值，请使用let关键字将它声明为常量。只将需要改变的值声明为变量。</p>
-<h4 id="类型标注"><a href="#类型标注" class="headerlink" title="类型标注"></a>类型标注</h4><p>当你声明常量或者变量的时候可以加上类型标注（type annotation），说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
-<p>这个例子给welcomeMessage变量添加了类型标注，表示这个变量可以存储String类型的值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var welcomeMessage: String</div></pre></td></tr></table></figure>
-<p>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：</p>
-<p>“声明一个类型为String，名字为welcomeMessage的变量。”</p>
-<p>“类型为String”的意思是“可以存储任意String类型的值。”</p>
-<p>welcomeMessage变量现在可以被设置成任意字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">welcomeMessage = &quot;Hello&quot;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:41:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-01_单例" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-01_单例/">Swift 从零开始 01_单例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift单例的写法"><a href="#Swift单例的写法" class="headerlink" title="Swift单例的写法"></a>Swift单例的写法</h1><h2 id="需要对单例的属性做修改"><a href="#需要对单例的属性做修改" class="headerlink" title="需要对单例的属性做修改"></a>需要对单例的属性做修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">static let shareInstance: HTTPClient = &#123;</div><div class="line"></div><div class="line">    let afn = HTTPClient()</div><div class="line">    </div><div class="line">    // 设置网络请求的 content-type: text/plain</div><div class="line">    </div><div class="line">    afn.responseSerializer.acceptableContentTypes?.insert(&quot;text/plain&quot;)</div><div class="line">    </div><div class="line">    return afn</div><div class="line">&#125;()</div></pre></td></tr></table></figure>
-<h2 id="不需要对单例的属性做修改"><a href="#不需要对单例的属性做修改" class="headerlink" title="不需要对单例的属性做修改"></a>不需要对单例的属性做修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">static let sharedInstance = TCPManager()</div></pre></td></tr></table></figure>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-01_单例/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:10:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-关于博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/关于博客/">关于博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从事新工作之后,记录自己的所获所得</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/关于博客/" class="archive-article-date">
-  	<time datetime="2016-11-21T02:53:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
+    <a href="/2016/11/21/Swift-从零开始-06_断言/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 06_断言</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
 
 
       </div>
@@ -674,8 +300,8 @@
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
