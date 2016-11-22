@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open | Chen bin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在swift 3中新增加了两种访问控制权限 fileprivate和 open。下面将对这两种新增访问控制做详细介绍。
+fileprivate在原有的swift中的 private其实并不是真正的私有，如果一个变量定义为private，在同一个文件中的其他类依然是可以访问到的。这个场景在使用extension的时候很明显。
+123456789class User &amp;#123;    private">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/index.html">
+<meta property="og:site_name" content="Chen bin">
+<meta property="og:description" content="在swift 3中新增加了两种访问控制权限 fileprivate和 open。下面将对这两种新增访问控制做详细介绍。
+fileprivate在原有的swift中的 private其实并不是真正的私有，如果一个变量定义为private，在同一个文件中的其他类依然是可以访问到的。这个场景在使用extension的时候很明显。
+123456789class User &amp;#123;    private">
+<meta property="og:updated_time" content="2016-11-22T02:51:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open">
+<meta name="twitter:description" content="在swift 3中新增加了两种访问控制权限 fileprivate和 open。下面将对这两种新增访问控制做详细介绍。
+fileprivate在原有的swift中的 private其实并不是真正的私有，如果一个变量定义为private，在同一个文件中的其他类依然是可以访问到的。这个场景在使用extension的时候很明显。
+123456789class User &amp;#123;    private">
+  
+    <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://ww1.sinaimg.cn/mw690/9c310acfjw1f9xix0ibtvj20qo0xbgp5.jpg" class="js-avatar show">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">陈彬</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/orangeice" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620459727/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/15249997147@163.com" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">陈彬</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://ww1.sinaimg.cn/mw690/9c310acfjw1f9xix0ibtvj20qo0xbgp5.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">陈彬</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/orangeice" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620459727/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/15249997147@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Swift-从零开始-08-新的访问控制fileprivate和open" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在swift 3中新增加了两种访问控制权限 fileprivate和 open。下面将对这两种新增访问控制做详细介绍。</p>
+<h2 id="fileprivate"><a href="#fileprivate" class="headerlink" title="fileprivate"></a>fileprivate</h2><p>在原有的swift中的 private其实并不是真正的私有，如果一个变量定义为private，在同一个文件中的其他类依然是可以访问到的。这个场景在使用extension的时候很明显。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class User &#123;</div><div class="line">    private var name = &quot;private&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension User&#123;</div><div class="line">    var accessPrivate: String &#123;</div><div class="line">        return name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样带来了两个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1.当我们标记为private时，意为真的私有还是文件内可共享呢？</div><div class="line">2.当我们如果意图为真正的私有时，必须保证这个类或者结构体在一个单独的文件里。否则可能同文件里其他的代码访问到。</div></pre></td></tr></table></figure>
+<p>由此，在swift 3中，新增加了一个 fileprivate来显式的表明，这个元素的访问权限为文件内私有。过去的private对应现在的fileprivate。现在的private则是真正的私有，离开了这个类或者结构体的作用域外面就无法访问。</p>
+<h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2><p>open则是弥补public语义上的不足。<br>现在的pubic有两层含义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">这个元素可以在其他作用域被访问</div><div class="line">这个元素可以在其他作用域被继承或者override</div></pre></td></tr></table></figure>
+<p>继承是一件危险的事情。尤其对于一个framework或者module的设计者而言。在自身的module内，类或者属性对于作者而言是清晰的，能否被继承或者override都是可控的。但是对于使用它的人，作者有时会希望传达出这个类或者属性不应该被继承或者修改。这个对应的就是 final。</p>
+<p>final的问题在于在标记之后，在任何地方都不能override。而对于lib的设计者而言，希望得到的是在module内可以被override，在被import到其他地方后其他用户使用的时候不能被override。</p>
+<p>这就是 open产生的初衷。通过open和public标记区别一个元素在其他module中是只能被访问还是可以被override。</p>
+<h3 id="下面是例子"><a href="#下面是例子" class="headerlink" title="下面是例子"></a>下面是例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/// ModuleA:</div><div class="line"></div><div class="line">// 这个类在ModuleA的范围外是不能被继承的，只能被访问</div><div class="line">public class NonSubclassableParentClass &#123;</div><div class="line"></div><div class="line">    public func foo() &#123;&#125;</div><div class="line"></div><div class="line">    // 这是错误的写法，因为class已经不能被继承，</div><div class="line">    // 所以他的方法的访问权限不能大于类的访问权限</div><div class="line">    open func bar() &#123;&#125;</div><div class="line"></div><div class="line">    // final的含义保持不变</div><div class="line">    public final func baz() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 在ModuleA的范围外可以被继承</div><div class="line">open class SubclassableParentClass &#123;</div><div class="line">    // 这个属性在ModuleA的范围外不能被override</div><div class="line">    public var size : Int</div><div class="line"></div><div class="line">    // 这个方法在ModuleA的范围外不能被override</div><div class="line">    public func foo() &#123;&#125;</div><div class="line"></div><div class="line">    // 这个方法在任何地方都可以被override</div><div class="line">    open func bar() &#123;&#125;</div><div class="line"></div><div class="line">    ///final的含义保持不变</div><div class="line">    public final func baz() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// final的含义保持不变</div><div class="line">public final class FinalClass &#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/// ModuleB:</div><div class="line"></div><div class="line">import ModuleA</div><div class="line"></div><div class="line">// 这个写法是错误的，编译会失败</div><div class="line">// 因为NonSubclassableParentClass类访问权限标记的是public，只能被访问不能被继承</div><div class="line">class SubclassA : NonSubclassableParentClass &#123; &#125;</div><div class="line"></div><div class="line">// 这样写法可以通过，因为SubclassableParentClass访问权限为 `open`.</div><div class="line">class SubclassB : SubclassableParentClass &#123;</div><div class="line"></div><div class="line">    // 这样写也会编译失败</div><div class="line">    // 因为这个方法在SubclassableParentClass 中的权限为public，不是`open&apos;.</div><div class="line">    override func foo() &#123; &#125;</div><div class="line"></div><div class="line">    // 这个方法因为在SubclassableParentClass中标记为open，所以可以这样写</div><div class="line">    // 这里不需要再声明为open，因为这个类是internal的</div><div class="line">    override func bar() &#123; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassC : SubclassableParentClass &#123;</div><div class="line">    // 这种写法会编译失败，因为这个类已经标记为open</div><div class="line">    // 这个方法override是一个open的方法，则也需要表明访问权限</div><div class="line">    override func bar() &#123; &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassD : SubclassableParentClass &#123;</div><div class="line">    // 正确的写法，方法也需要标记为open</div><div class="line">    open override func bar() &#123; &#125;    </div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassE : SubclassableParentClass &#123;</div><div class="line">    // 也可以显式的指出这个方法不能在被override</div><div class="line">    public final override func bar() &#123; &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在的访问权限则依次为：open，public，internal，fileprivate，private。<br>有的人会觉得访问权限选择的增加加大了语言的复杂度。但是如果我们思考swift语言的设计目标之一就是一门安全的语言（“Designed for Safety”）就能理解这次的改动。更加明确清晰的访问权限控制可以使程序员表达出更准确的意图，当然也迫使在编码时思考的更加深入。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/" class="archive-article-date">
+  	<time datetime="2016-11-22T02:41:10.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift3-0/">swift3.0</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/21/Swift-从零开始-07-swift中的关键字说明/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 07_swift中的关键字说明(一)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<a class="jiathis_button_facebook"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_plus"></a>
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_tumblr"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+</div>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=2119929" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+
+<div class="share_addthis share_jia">
+  <div class="sharing addthis_toolbox share">
+  	<span class="jiathis_txt">Share to: &nbsp; </span>
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Swift-从零开始-08-新的访问控制fileprivate和open" data-title="Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open" data-url="http://yoursite.com/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 陈彬
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<script src="/js/totop.js"></script>
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">波澜不惊的程序猿</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

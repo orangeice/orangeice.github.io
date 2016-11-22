@@ -137,6 +137,69 @@
       <div class="body-wrap">
         
   
+    <article id="post-Swift-从零开始-08-新的访问控制fileprivate和open" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/">Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在swift 3中新增加了两种访问控制权限 fileprivate和 open。下面将对这两种新增访问控制做详细介绍。</p>
+<h2 id="fileprivate"><a href="#fileprivate" class="headerlink" title="fileprivate"></a>fileprivate</h2><p>在原有的swift中的 private其实并不是真正的私有，如果一个变量定义为private，在同一个文件中的其他类依然是可以访问到的。这个场景在使用extension的时候很明显。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class User &#123;</div><div class="line">    private var name = &quot;private&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension User&#123;</div><div class="line">    var accessPrivate: String &#123;</div><div class="line">        return name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样带来了两个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1.当我们标记为private时，意为真的私有还是文件内可共享呢？</div><div class="line">2.当我们如果意图为真正的私有时，必须保证这个类或者结构体在一个单独的文件里。否则可能同文件里其他的代码访问到。</div></pre></td></tr></table></figure>
+<p>由此，在swift 3中，新增加了一个 fileprivate来显式的表明，这个元素的访问权限为文件内私有。过去的private对应现在的fileprivate。现在的private则是真正的私有，离开了这个类或者结构体的作用域外面就无法访问。</p>
+<h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2><p>open则是弥补public语义上的不足。<br>现在的pubic有两层含义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">这个元素可以在其他作用域被访问</div><div class="line">这个元素可以在其他作用域被继承或者override</div></pre></td></tr></table></figure>
+<p>继承是一件危险的事情。尤其对于一个framework或者module的设计者而言。在自身的module内，类或者属性对于作者而言是清晰的，能否被继承或者override都是可控的。但是对于使用它的人，作者有时会希望传达出这个类或者属性不应该被继承或者修改。这个对应的就是 final。</p>
+<p>final的问题在于在标记之后，在任何地方都不能override。而对于lib的设计者而言，希望得到的是在module内可以被override，在被import到其他地方后其他用户使用的时候不能被override。</p>
+<p>这就是 open产生的初衷。通过open和public标记区别一个元素在其他module中是只能被访问还是可以被override。</p>
+<h3 id="下面是例子"><a href="#下面是例子" class="headerlink" title="下面是例子"></a>下面是例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/// ModuleA:</div><div class="line"></div><div class="line">// 这个类在ModuleA的范围外是不能被继承的，只能被访问</div><div class="line">public class NonSubclassableParentClass &#123;</div><div class="line"></div><div class="line">    public func foo() &#123;&#125;</div><div class="line"></div><div class="line">    // 这是错误的写法，因为class已经不能被继承，</div><div class="line">    // 所以他的方法的访问权限不能大于类的访问权限</div><div class="line">    open func bar() &#123;&#125;</div><div class="line"></div><div class="line">    // final的含义保持不变</div><div class="line">    public final func baz() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 在ModuleA的范围外可以被继承</div><div class="line">open class SubclassableParentClass &#123;</div><div class="line">    // 这个属性在ModuleA的范围外不能被override</div><div class="line">    public var size : Int</div><div class="line"></div><div class="line">    // 这个方法在ModuleA的范围外不能被override</div><div class="line">    public func foo() &#123;&#125;</div><div class="line"></div><div class="line">    // 这个方法在任何地方都可以被override</div><div class="line">    open func bar() &#123;&#125;</div><div class="line"></div><div class="line">    ///final的含义保持不变</div><div class="line">    public final func baz() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// final的含义保持不变</div><div class="line">public final class FinalClass &#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/// ModuleB:</div><div class="line"></div><div class="line">import ModuleA</div><div class="line"></div><div class="line">// 这个写法是错误的，编译会失败</div><div class="line">// 因为NonSubclassableParentClass类访问权限标记的是public，只能被访问不能被继承</div><div class="line">class SubclassA : NonSubclassableParentClass &#123; &#125;</div><div class="line"></div><div class="line">// 这样写法可以通过，因为SubclassableParentClass访问权限为 `open`.</div><div class="line">class SubclassB : SubclassableParentClass &#123;</div><div class="line"></div><div class="line">    // 这样写也会编译失败</div><div class="line">    // 因为这个方法在SubclassableParentClass 中的权限为public，不是`open&apos;.</div><div class="line">    override func foo() &#123; &#125;</div><div class="line"></div><div class="line">    // 这个方法因为在SubclassableParentClass中标记为open，所以可以这样写</div><div class="line">    // 这里不需要再声明为open，因为这个类是internal的</div><div class="line">    override func bar() &#123; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassC : SubclassableParentClass &#123;</div><div class="line">    // 这种写法会编译失败，因为这个类已经标记为open</div><div class="line">    // 这个方法override是一个open的方法，则也需要表明访问权限</div><div class="line">    override func bar() &#123; &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassD : SubclassableParentClass &#123;</div><div class="line">    // 正确的写法，方法也需要标记为open</div><div class="line">    open override func bar() &#123; &#125;    </div><div class="line">&#125;</div><div class="line"></div><div class="line">open class SubclassE : SubclassableParentClass &#123;</div><div class="line">    // 也可以显式的指出这个方法不能在被override</div><div class="line">    public final override func bar() &#123; &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在的访问权限则依次为：open，public，internal，fileprivate，private。<br>有的人会觉得访问权限选择的增加加大了语言的复杂度。但是如果我们思考swift语言的设计目标之一就是一门安全的语言（“Designed for Safety”）就能理解这次的改动。更加明确清晰的访问权限控制可以使程序员表达出更准确的意图，当然也迫使在编码时思考的更加深入。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/" class="archive-article-date">
+  	<time datetime="2016-11-22T02:41:10.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift3-0/">swift3.0</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Swift-从零开始-07-swift中的关键字说明" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -718,7 +781,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				
+    				<a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
     			</div>
     	</section>
     
