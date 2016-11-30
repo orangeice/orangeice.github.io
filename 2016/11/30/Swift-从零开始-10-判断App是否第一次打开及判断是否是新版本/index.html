@@ -6,30 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解 | Chen bin</title>
+  <title>Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这里总结了下 as、as!、as? 这三种类型转换操作符的异同，以及各自的使用场景。
+  <meta name="description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
 
-1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
-首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解">
-<meta property="og:url" content="http://yoursite.com/2016/11/22/Swift-从零开始-09_as,as!,as">
+<meta property="og:title" content="Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本">
+<meta property="og:url" content="http://yoursite.com/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="这里总结了下 as、as!、as? 这三种类型转换操作符的异同，以及各自的使用场景。
+<meta property="og:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
 
-1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
-首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
-<meta property="og:updated_time" content="2016-11-22T03:25:14.000Z">
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
+<meta property="og:updated_time" content="2016-11-30T01:50:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解">
-<meta name="twitter:description" content="这里总结了下 as、as!、as? 这三种类型转换操作符的异同，以及各自的使用场景。
+<meta name="twitter:title" content="Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本">
+<meta name="twitter:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
 
-1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
-首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -148,7 +148,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Swift-从零开始-09_as,as!,as?" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -158,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解
+      Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本
     </h1>
   
 
@@ -166,69 +166,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <font color="orangered" size="3">这里总结了下 as、as!、as? 这三种类型转换操作符的异同，以及各自的使用场景。</font>
+        <h2 id="1-判断App是否第一次打开"><a href="#1-判断App是否第一次打开" class="headerlink" title="1.判断App是否第一次打开"></a>1.判断App是否第一次打开</h2><pre><code> //App第一次启动调用方法 :didFinishLaunchingWithOptions:
 
-<h3 id="1-as使用场合"><a href="#1-as使用场合" class="headerlink" title="1.as使用场合"></a>1.as使用场合</h3><p>摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。</p>
-<p>首先是运行时就不多说了，重要的是 as 应用条件有2种情况： </p>
-<pre><code>1，和 &quot;as&quot; 右边类型一致
-2，是右边类型的子类（这种情况在Java里叫向上转型）
-</code></pre><p>示例代码:</p>
-<pre><code>claa Animal {}
-class Dog: Animal{}
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) {
 
-let a = Animal()
-a as Animal    // a和右边Animal类型一致,编译成功
+      NSUserDefaults.standardUserDefaults().setBool(true, forKey: &quot;firstLaunch&quot;)
+      print(&quot;App第一次打开&quot;)
 
-let d = Dog()
-d as Animal    // d是右边Animal的子类,编译成功
-</code></pre><p><font color="orangered" size="3">少数用法:</font><br><br>(1) 消除二义性,,数值类型转换</p>
-<pre><code>let num1 = 42 as CGFloat
-let num2 = 42 as Int
-let num3 = 42.5 as Int
-let num4 = (42 / 2) as Double
-</code></pre><p>(2) switch语句中进行模式匹配<br>如果不知道一个对象是什么类型，你可以通过switch语法检测它的类型，并且尝试在不同的情况下使用对应的类型进行相应的处理。</p>
-<pre><code>switch animal {
-    case let cat as Cat:
-        print(&quot;如果是Cat类型对象，则做相应处理&quot;)
-    case let dog as Dog:
-        print(&quot;如果是Dog类型对象，则做相应处理&quot;)
-    default: break
-}
-</code></pre><h3 id="2-as-适用场合"><a href="#2-as-适用场合" class="headerlink" title="2.as!适用场合"></a>2.as!适用场合</h3><p>上例中 第二种情况，左边是右边类型的子类,如果碰到 as 左边类型是右边类型的父类则会报错！（as不可以用于父类转子类，用java话说，不支持向下转型），由此可用as！(强转) ,如果转换失败会报 runtime 运行错误。</p>
-<pre><code>class Animal {}
-class Dog: Animal {}
+      }else{
 
-let a: Animal = Dog()
+      print(&quot;App不是第一次打开&quot;)
+    }
+</code></pre><h2 id="2-判断App版本是否是新版本-OC"><a href="#2-判断App版本是否是新版本-OC" class="headerlink" title="2.判断App版本是否是新版本(OC)"></a>2.判断App版本是否是新版本(OC)</h2><pre><code>#pragma mark - 判断是不是新版本,是否需要显示新特性
+- (BOOL)isNewVision {
+    // MARK: - 目标：第一次启动这个应用时，显示新特性界面，以后就直接进入主程序！
+    // 版本号：两个版本号。Info.plist中有对应的版本号
+    // 1. 获取应用当前的版本号
+    // 获取Info.plist文件的所有信息
+    NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
+    // 获取当前版本号
+    NSString *currentBete = infoDict[@&quot;CFBundleShortVersionString&quot;];
 
-a as! Dog        //编译成功
-a as Dog        //报错 -- 编译器也会提示你用as！, as！强转如果类型不符合会报错。
-</code></pre><h3 id="3-as-适用场合"><a href="#3-as-适用场合" class="headerlink" title="3.as?适用场合"></a>3.as?适用场合</h3><p>as? 和 as! 操作符的转换规则完全一样。但 as? 如果转换不成功的时候便会返回一个 nil 对象。成功的话返回可选类型值（optional），需要我们拆包使用。<br>由于 as? 在转换失败的时候也不会出现错误，所以对于如果能确保100%会成功的转换则可使用 as!，否则使用 as?</p>
-<pre><code>let animal:Animal = Cat()
+    // 2. 获取之前存储的版本号
+    // 获取偏好设置对象
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *oldBete = [defaults objectForKey:@&quot;app_version&quot;];
 
-if let cat = animal as? Cat {
-    print(&quot;cat is not nil&quot;)
-} else {
-    print(&quot;cat is nil&quot;)
-}
-</code></pre><pre><code>class Animal {}
-class Cat: Animal {}
-class Dog: Animal {}
+    // 3. 比较新旧版本号
+    if ([currentBete isEqualToString:oldBete])
+    {
+        //如果新旧版本号相等,直接进入主程序
+        return NO;
+    }else {
+        //如果不相等
+        //获取偏好设置
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //存储
+        [defaults setObject:currentBete forKey:@&quot;app_version&quot;];
+        //立即同步
+        [defaults synchronize];
+        return YES;
+    }
 
-let animal: Animal = Cat()
-animal as? Dog    //取到的是nil
-animal as! Dog    //运行时报错
+    didFinishLaunchingWithOptions:
+    //设置根控制器(DXGuideController:新特性)
+    if ([self isNewVision]) {
+        self.window.rootViewController = [[DXGuideController alloc] init];
+    }else {
+         self.window.rootViewController = tabBarVC;
 </code></pre>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/22/Swift-从零开始-09_as,as!,as?/" class="archive-article-date">
-  	<time datetime="2016-11-22T03:05:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+      <a href="/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/" class="archive-article-date">
+  	<time datetime="2016-11-30T01:26:12.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/as关键字/">as关键字</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App启动/">App启动</a></li></ul>
 	</div>
 
       
@@ -241,18 +238,9 @@ animal as! Dog    //运行时报错
   
 <nav id="article-nav">
   
-    <a href="/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/22/Swift-从零开始-08-新的访问控制fileprivate和open/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swift 从零开始 08_Swift3.0必看:新的访问控制fileprivate和open</div>
+    <a href="/2016/11/22/Swift-从零开始-09_as,as!,as?/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -296,7 +284,7 @@ animal as! Dog    //运行时报错
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Swift-从零开始-09_as,as!,as?" data-title="Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解" data-url="http://yoursite.com/2016/11/22/Swift-从零开始-09_as,as!,as?/"></div>
+	<div class="ds-thread" data-thread-key="Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本" data-title="Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本" data-url="http://yoursite.com/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
