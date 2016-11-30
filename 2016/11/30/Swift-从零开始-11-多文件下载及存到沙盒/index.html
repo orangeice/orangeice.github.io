@@ -6,18 +6,42 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>关于博客 | Chen bin</title>
+  <title>Swift 从零开始 11_多文件下载及存到沙盒 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从事新工作之后,记录自己的所获所得">
+  <meta name="description" content="本文主要说说,App第一次启动时,去下载一些数据保存到沙盒该如何实现.这里用的是ios7后新出的NSUrlSession
+
+先看代码
+
+func downloadGameAudioWithUrl(urlStr: String) {
+
+    // 1. URL
+    let url = NSURL(string: urlStr)
+    let request = NSURLRequest(UR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于博客">
-<meta property="og:url" content="http://yoursite.com/2016/11/21/关于博客/index.html">
+<meta property="og:title" content="Swift 从零开始 11_多文件下载及存到沙盒">
+<meta property="og:url" content="http://yoursite.com/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="从事新工作之后,记录自己的所获所得">
-<meta property="og:updated_time" content="2016-11-21T03:59:42.000Z">
+<meta property="og:description" content="本文主要说说,App第一次启动时,去下载一些数据保存到沙盒该如何实现.这里用的是ios7后新出的NSUrlSession
+
+先看代码
+
+func downloadGameAudioWithUrl(urlStr: String) {
+
+    // 1. URL
+    let url = NSURL(string: urlStr)
+    let request = NSURLRequest(UR">
+<meta property="og:updated_time" content="2016-11-30T02:32:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于博客">
-<meta name="twitter:description" content="从事新工作之后,记录自己的所获所得">
+<meta name="twitter:title" content="Swift 从零开始 11_多文件下载及存到沙盒">
+<meta name="twitter:description" content="本文主要说说,App第一次启动时,去下载一些数据保存到沙盒该如何实现.这里用的是ios7后新出的NSUrlSession
+
+先看代码
+
+func downloadGameAudioWithUrl(urlStr: String) {
+
+    // 1. URL
+    let url = NSURL(string: urlStr)
+    let request = NSURLRequest(UR">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -136,7 +160,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-关于博客" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-11-多文件下载及存到沙盒" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于博客
+      Swift 从零开始 11_多文件下载及存到沙盒
     </h1>
   
 
@@ -154,16 +178,74 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从事新工作之后,记录自己的所获所得</p>
+        <font color="OrangeRed" size="3">本文主要说说,App第一次启动时,去下载一些数据保存到沙盒该如何实现.<br>这里用的是ios7后新出的NSUrlSession</font>
 
+<font color="LightSalmon" size="3">先看代码</font>
+
+<pre><code>func downloadGameAudioWithUrl(urlStr: String) {
+
+    // 1. URL
+    let url = NSURL(string: urlStr)
+    let request = NSURLRequest(URL: url!)
+
+    // 2. 自定义session,需要设置代理
+    // 选择默认配置信息
+    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+    let downloadSession = NSURLSession(configuration:
+      config, delegate: self, delegateQueue: nil)
+
+     // 3. 发起下载任务(在这里回调里面,就可以对下载好的文件进行处理)
+    let downloadTask = downloadSession.downloadTaskWithRequest(request) { (location, response, error) in
+
+     // 下载的位置,沙盒中tmp目录中的临时文件,会被及时删除
+      print(&quot;文件下载路径: \(location.path)&quot;)
+
+     /*
+      document       备份,下载的文件不能放在此文件夹中 
+      cache          缓存的,不备份,重新启动不会被清空,如果缓存内容过多,可以考虑新建一条线程检查缓存目录中的文件大小,自动清理缓存,给用户节省控件 
+      tmp            临时,不备份,不缓存,重新启动iPhone,会自动清空 
+     */  
+
+      //要把下载下来的文件,从tmp文件夹拷贝到cache文件夹下
+      //获取cachew文件路径
+      let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).lastEle
+
+      //获取下载文件的名字保存以便下面的路径拼接
+      self.downloadFileName = (url?.lastPathComponent)!
+
+      // 拼接文件路径
+      let filePath = path.stringByAppendingString(&quot;/&quot; + self.downloadFileName)
+      print(&quot;文件保存路径: \(filePath)&quot;)
+
+      //创建文件管理器
+      //这里,copyItemAtPath方法需要做异常处理
+      let fileManager = NSFileManager.defaultManager()
+      do {
+        try fileManager.copyItemAtPath(location!.path!, toPath: filePath)
+      } catch let error as NSError {
+        // 发生了错误
+        print(error.localizedDescription)
+      }
+    }
+
+    // 4. 启动下载任务
+    downloadTask.resume()
+    }
+}
+</code></pre><font color="LightCoral" size="4">后记:<br>这里只提到了我项目中用到的方法,很有很多方法很多思路可以实现,欢迎大家来讨论!</font>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/21/关于博客/" class="archive-article-date">
-  	<time datetime="2016-11-21T02:53:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+      <a href="/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/" class="archive-article-date">
+  	<time datetime="2016-11-30T01:54:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
 </a>
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/沙盒-下载/">沙盒 下载</a></li></ul>
+	</div>
+
       
 
       <div class="clearfix"></div>
@@ -174,15 +256,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/21/Swift-从零开始-01_单例/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/11/30/IOS开发实用小技巧-持续更新/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Swift 从零开始 01_单例
+          &lt;font color=orange size=5&gt;IOS开发实用小技巧(持续更新)&lt;/font&gt;
         
       </div>
     </a>
   
+  
+    <a href="/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -224,7 +311,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="关于博客" data-title="关于博客" data-url="http://yoursite.com/2016/11/21/关于博客/"></div>
+	<div class="ds-thread" data-thread-key="Swift-从零开始-11-多文件下载及存到沙盒" data-title="Swift 从零开始 11_多文件下载及存到沙盒" data-url="http://yoursite.com/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

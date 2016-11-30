@@ -137,6 +137,167 @@
       <div class="body-wrap">
         
   
+    <article id="post-IOS开发实用小技巧-持续更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/30/IOS开发实用小技巧-持续更新/">&lt;font color=orange size=5&gt;IOS开发实用小技巧(持续更新)&lt;/font&gt;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font color="OrangeRed" size="4">1.设置电池栏</font>
+
+<pre><code>didFinishLaunchingWithOptions: 
+
+//MARK :-设置电池栏(状态栏)
+    //设置颜色
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+    //启动时隐藏
+    application.statusBarHidden = NO;
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/30/IOS开发实用小技巧-持续更新/" class="archive-article-date">
+  	<time datetime="2016-11-30T01:55:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Swift-从零开始-11-多文件下载及存到沙盒" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/">Swift 从零开始 11_多文件下载及存到沙盒</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font color="OrangeRed" size="3">本文主要说说,App第一次启动时,去下载一些数据保存到沙盒该如何实现.<br>这里用的是ios7后新出的NSUrlSession</font>
+
+<font color="LightSalmon" size="3">先看代码</font>
+
+<pre><code>func downloadGameAudioWithUrl(urlStr: String) {
+
+    // 1. URL
+    let url = NSURL(string: urlStr)
+    let request = NSURLRequest(URL: url!)
+
+    // 2. 自定义session,需要设置代理
+    // 选择默认配置信息
+    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+    let downloadSession = NSURLSession(configuration:
+      config, delegate: self, delegateQueue: nil)
+
+     // 3. 发起下载任务(在这里回调里面,就可以对下载好的文件进行处理)
+    let downloadTask = downloadSession.downloadTaskWithRequest(request) { (location, response, error) in
+
+     // 下载的位置,沙盒中tmp目录中的临时文件,会被及时删除
+      print(&quot;文件下载路径: \(location.path)&quot;)
+
+     /*
+      document       备份,下载的文件不能放在此文件夹中 
+      cache          缓存的,不备份,重新启动不会被清空,如果缓存内容过多,可以考虑新建一条线程检查缓存目录中的文件大小,自动清理缓存,给用户节省控件 
+      tmp            临时,不备份,不缓存,重新启动iPhone,会自动清空 
+     */  
+
+      //要把下载下来的文件,从tmp文件夹拷贝到cache文件夹下
+      //获取cachew文件路径
+      let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).lastEle
+
+      //获取下载文件的名字保存以便下面的路径拼接
+      self.downloadFileName = (url?.lastPathComponent)!
+
+      // 拼接文件路径
+      let filePath = path.stringByAppendingString(&quot;/&quot; + self.downloadFileName)
+      print(&quot;文件保存路径: \(filePath)&quot;)
+
+      //创建文件管理器
+      //这里,copyItemAtPath方法需要做异常处理
+      let fileManager = NSFileManager.defaultManager()
+      do {
+        try fileManager.copyItemAtPath(location!.path!, toPath: filePath)
+      } catch let error as NSError {
+        // 发生了错误
+        print(error.localizedDescription)
+      }
+    }
+
+    // 4. 启动下载任务
+    downloadTask.resume()
+    }
+}
+</code></pre><font color="LightCoral" size="4">后记:<br>这里只提到了我项目中用到的方法,很有很多方法很多思路可以实现,欢迎大家来讨论!</font>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/" class="archive-article-date">
+  	<time datetime="2016-11-30T01:54:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/沙盒-下载/">沙盒 下载</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1287,120 +1448,6 @@ if i == 1 {
 
 
   
-    <article id="post-Swift-从零开始-02_常量,变量及类型标注" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/">Swift 从零开始 02_常量,变量及类型标注</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="声明常量-变量以及类型标注"><a href="#声明常量-变量以及类型标注" class="headerlink" title="声明常量,变量以及类型标注"></a>声明常量,变量以及类型标注</h2><h4 id="常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数："><a href="#常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：" class="headerlink" title="常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数："></a>常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：</h4><pre><code>let maximumNumberOfLoginAttempts = 10
-var currentLoginAttempt = 0
-</code></pre><h4 id="这两行代码可以被理解为："><a href="#这两行代码可以被理解为：" class="headerlink" title="这两行代码可以被理解为："></a>这两行代码可以被理解为：</h4><p>“声明一个名字是maximumNumberOfLoginAttempts的新常量，并给它一个值10。然后，声明一个名字是currentLoginAttempt的变量并将它的值初始化为0.”</p>
-<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
-<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：</p>
-<pre><code>var x = 0.0, y = 0.0, z = 0.0
-</code></pre><p>注意：<br>如果你的代码中有不需要改变的值，请使用let关键字将它声明为常量。只将需要改变的值声明为变量。</p>
-<h4 id="类型标注"><a href="#类型标注" class="headerlink" title="类型标注"></a>类型标注</h4><p>当你声明常量或者变量的时候可以加上类型标注（type annotation），说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
-<p>这个例子给welcomeMessage变量添加了类型标注，表示这个变量可以存储String类型的值：</p>
-<pre><code>var welcomeMessage: String
-</code></pre><p>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：</p>
-<p>“声明一个类型为String，名字为welcomeMessage的变量。”</p>
-<p>“类型为String”的意思是“可以存储任意String类型的值。”</p>
-<p>welcomeMessage变量现在可以被设置成任意字符串：</p>
-<pre><code>welcomeMessage = &quot;Hello&quot;
-</code></pre>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-02_常量,变量及类型标注/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:41:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-01_单例" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-01_单例/">Swift 从零开始 01_单例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift单例的写法"><a href="#Swift单例的写法" class="headerlink" title="Swift单例的写法"></a>Swift单例的写法</h1><h2 id="需要对单例的属性做修改"><a href="#需要对单例的属性做修改" class="headerlink" title="需要对单例的属性做修改"></a>需要对单例的属性做修改</h2><pre><code>    static let shareInstance: HTTPClient = {
-
-        let afn = HTTPClient()
-
-        // 设置网络请求的 content-type: text/plain
-
-        afn.responseSerializer.acceptableContentTypes?.insert(&quot;text/plain&quot;)
-
-        return afn
-    }()
-</code></pre><h2 id="不需要对单例的属性做修改"><a href="#不需要对单例的属性做修改" class="headerlink" title="不需要对单例的属性做修改"></a>不需要对单例的属性做修改</h2><pre><code>static let sharedInstance = TCPManager()
-</code></pre>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-01_单例/" class="archive-article-date">
-  	<time datetime="2016-11-21T03:10:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1471,7 +1518,7 @@ var currentLoginAttempt = 0
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
     			</div>
     	</section>
     
