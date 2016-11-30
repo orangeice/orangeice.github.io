@@ -6,24 +6,39 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>IOS开发实用小技巧(持续更新) | Chen bin</title>
+  <title>删除字符串中相同的字符 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.设置电池栏
+  <meta name="description" content="删除字符串中相同的字符问题项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉
+实现
+现将字符串截取处理,截取完成后是用一个数组来接收;
+1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-1234567didFinishLaunchingWithOptions: //MARK :-设置电池栏(状态栏)    //设置颜色    application.statusBarStyle = UIStatusBarStyleLightContent;    //启动时隐藏    application.statusBarHidden = NO;">
+将数组中多余的数据筛选出来,有多种方法
+
+利用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IOS开发实用小技巧(持续更新)">
-<meta property="og:url" content="http://yoursite.com/2016/11/30/IOS开发实用小技巧-持续更新/index.html">
+<meta property="og:title" content="删除字符串中相同的字符">
+<meta property="og:url" content="http://yoursite.com/2016/11/30/测试/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="1.设置电池栏
+<meta property="og:description" content="删除字符串中相同的字符问题项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉
+实现
+现将字符串截取处理,截取完成后是用一个数组来接收;
+1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-1234567didFinishLaunchingWithOptions: //MARK :-设置电池栏(状态栏)    //设置颜色    application.statusBarStyle = UIStatusBarStyleLightContent;    //启动时隐藏    application.statusBarHidden = NO;">
-<meta property="og:updated_time" content="2016-11-30T02:57:09.000Z">
+将数组中多余的数据筛选出来,有多种方法
+
+利用">
+<meta property="og:updated_time" content="2016-11-30T03:36:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IOS开发实用小技巧(持续更新)">
-<meta name="twitter:description" content="1.设置电池栏
+<meta name="twitter:title" content="删除字符串中相同的字符">
+<meta name="twitter:description" content="删除字符串中相同的字符问题项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉
+实现
+现将字符串截取处理,截取完成后是用一个数组来接收;
+1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-1234567didFinishLaunchingWithOptions: //MARK :-设置电池栏(状态栏)    //设置颜色    application.statusBarStyle = UIStatusBarStyleLightContent;    //启动时隐藏    application.statusBarHidden = NO;">
+将数组中多余的数据筛选出来,有多种方法
+
+利用">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -142,7 +157,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-IOS开发实用小技巧-持续更新" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,7 +167,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      IOS开发实用小技巧(持续更新)
+      删除字符串中相同的字符
     </h1>
   
 
@@ -160,23 +175,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <font color="OrangeRed" size="4">1.设置电池栏</font>
+        <h1 id="删除字符串中相同的字符"><a href="#删除字符串中相同的字符" class="headerlink" title="删除字符串中相同的字符"></a>删除字符串中相同的字符</h1><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
+<li><p>现将字符串截取处理,截取完成后是用一个数组来接收;</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *listStrs = [<span class="keyword">str</span> componentsSeparatedByString:@<span class="string">","</span>];</div></pre></td></tr></table></figure>
+</li>
+<li><p>将数组中多余的数据筛选出来,有多种方法</p>
+<ul>
+<li><p>利用NSDictionary的AllKeys,通过对数组中的数据赋值,相同的值只会赋值一次</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity: <span class="type">0</span>];</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(NSString *<span class="keyword">new</span><span class="type">Str</span> <span class="keyword">in</span> listStrs)</div><div class="line">    &#123;</div><div class="line">        [dict setValue: <span class="type">newStr forKey</span>: <span class="keyword">new</span><span class="type">Str</span>];</div><div class="line">    &#125;</div><div class="line">	``` </div><div class="line"></div><div class="line"></div><div class="line">	- 利用NSSet的AllObjects</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>NSSet *set = [NSSet setWithArray: listStrs];<br>    <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">- </span>利用NSArray的containsObjects</div></pre></td></tr></table></figure></p>
+<pre><code> NSMutableArray *listArr = [[NSMutableArray alloc]init];
+for (NSString * newStr in listStrs) {
+    if (![listArr containsObject: newStr]) {
+        [listArr addObject: newStr];
+    }
+}    
+   <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">3. </span>将新的数据拼接起来</div></pre></td></tr></table></figure>
+</code></pre><p> str = [listArr componentsJoinedByString:@”,”];<br> ```</p>
 
-<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">didFinishLaunchingWithOptions</span>: </div><div class="line"></div><div class="line"><span class="objectivec"><span class="comment">//MARK :-设置电池栏(状态栏)</span></span></div><div class="line">    <span class="comment">//设置颜色</span></div><div class="line">    application.statusBarStyle = <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">    <span class="comment">//启动时隐藏</span></div><div class="line">    application.statusBarHidden = <span class="literal">NO</span>;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/30/IOS开发实用小技巧-持续更新/" class="archive-article-date">
-  	<time datetime="2016-11-30T01:55:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
+      <a href="/2016/11/30/测试/" class="archive-article-date">
+  	<time datetime="2016-11-30T02:58:44.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
 </a>
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/OC/">OC</a>
 	</div>
 
-      
 
       <div class="clearfix"></div>
     </div>
@@ -186,18 +221,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/30/测试/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/11/30/Swift-从零开始-12-Swift和H5的交互/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          删除字符串中相同的字符
+          Swift 从零开始 12_Swift和H5的交互
         
       </div>
     </a>
   
   
-    <a href="/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swift 从零开始 11_多文件下载及存到沙盒</div>
+    <a href="/2016/11/30/IOS开发实用小技巧-持续更新/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IOS开发实用小技巧(持续更新)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -241,7 +276,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="IOS开发实用小技巧-持续更新" data-title="IOS开发实用小技巧(持续更新)" data-url="http://yoursite.com/2016/11/30/IOS开发实用小技巧-持续更新/"></div>
+	<div class="ds-thread" data-thread-key="测试" data-title="删除字符串中相同的字符" data-url="http://yoursite.com/2016/11/30/测试/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
