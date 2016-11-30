@@ -28,7 +28,7 @@
 将数组中多余的数据筛选出来,有多种方法
 
 利用">
-<meta property="og:updated_time" content="2016-11-30T03:36:45.000Z">
+<meta property="og:updated_time" content="2016-11-30T03:42:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="删除字符串中相同的字符">
 <meta name="twitter:description" content="删除字符串中相同的字符问题项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉
@@ -183,7 +183,7 @@
 <li><p>将数组中多余的数据筛选出来,有多种方法</p>
 <ul>
 <li><p>利用NSDictionary的AllKeys,通过对数组中的数据赋值,相同的值只会赋值一次</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity: <span class="type">0</span>];</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(NSString *<span class="keyword">new</span><span class="type">Str</span> <span class="keyword">in</span> listStrs)</div><div class="line">    &#123;</div><div class="line">        [dict setValue: <span class="type">newStr forKey</span>: <span class="keyword">new</span><span class="type">Str</span>];</div><div class="line">    &#125;</div><div class="line">	``` </div><div class="line"></div><div class="line"></div><div class="line">	- 利用NSSet的AllObjects</div></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity: <span class="type">0</span>];</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(NSString *<span class="keyword">new</span><span class="type">Str</span> <span class="keyword">in</span> listStrs)</div><div class="line">    &#123;</div><div class="line">        [dict setValue: <span class="type">newStr forKey</span>: <span class="keyword">new</span><span class="type">Str</span>];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">	``` </div><div class="line"></div><div class="line"></div><div class="line">	- 利用NSSet的AllObjects</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
