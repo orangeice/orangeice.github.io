@@ -13,9 +13,9 @@
 现将字符串截取处理,截取完成后是用一个数组来接收;
 1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-将数组中多余的数据筛选出来,有多种方法
 
-利用">
+
+将数组中多余的数据筛选出来,有多种方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="删除字符串中相同的字符">
 <meta property="og:url" content="http://yoursite.com/2016/11/30/测试/index.html">
@@ -25,10 +25,10 @@
 现将字符串截取处理,截取完成后是用一个数组来接收;
 1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-将数组中多余的数据筛选出来,有多种方法
 
-利用">
-<meta property="og:updated_time" content="2016-11-30T03:42:07.000Z">
+
+将数组中多余的数据筛选出来,有多种方法">
+<meta property="og:updated_time" content="2016-11-30T03:49:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="删除字符串中相同的字符">
 <meta name="twitter:description" content="删除字符串中相同的字符问题项目中服务器请求回来的一个字符串中有相同的情况,如str = @”4303,4305,4306,4303,4307”,需要将其中一个4303去掉
@@ -36,9 +36,9 @@
 现将字符串截取处理,截取完成后是用一个数组来接收;
 1NSArray *listStrs = [str componentsSeparatedByString:@&quot;,&quot;];
 
-将数组中多余的数据筛选出来,有多种方法
 
-利用">
+
+将数组中多余的数据筛选出来,有多种方法">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -180,23 +180,23 @@
 <li><p>现将字符串截取处理,截取完成后是用一个数组来接收;</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *listStrs = [<span class="keyword">str</span> componentsSeparatedByString:@<span class="string">","</span>];</div></pre></td></tr></table></figure>
 </li>
+</ol>
+<ol>
 <li><p>将数组中多余的数据筛选出来,有多种方法</p>
 <ul>
 <li><p>利用NSDictionary的AllKeys,通过对数组中的数据赋值,相同的值只会赋值一次</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity: <span class="type">0</span>];</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(NSString *<span class="keyword">new</span><span class="type">Str</span> <span class="keyword">in</span> listStrs)</div><div class="line">    &#123;</div><div class="line">        [dict setValue: <span class="type">newStr forKey</span>: <span class="keyword">new</span><span class="type">Str</span>];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">	``` </div><div class="line"></div><div class="line"></div><div class="line">	- 利用NSSet的AllObjects</div></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *dict = [[NSMutableDictionary 	alloc] initWithCapacity: <span class="type">0</span>];</div><div class="line"></div><div class="line"><span class="keyword">for</span>(NSString *<span class="keyword">new</span><span class="type">Str</span> <span class="keyword">in</span> listStrs)</div><div class="line">   &#123;</div><div class="line">       [dict setValue: <span class="type">newStr forKey</span>: <span class="keyword">new</span><span class="type">Str</span>];</div><div class="line">   &#125;</div><div class="line">``` </div><div class="line"></div><div class="line">- 利用NSSet的AllObjects</div></pre></td></tr></table></figure>
+<p>NSSet *set = [NSSet setWithArray: listStrs];</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">- </span>利用NSArray的containsObjects</div></pre></td></tr></table></figure>
+<p>NSMutableArray <em>listArr = [[NSMutableArray alloc]init];<br>for (NSString </em> newStr in listStrs) {<br>  if (![listArr containsObject: newStr]) {</p>
+<pre><code>[listArr addObject: newStr];
+</code></pre><p>  }<br>}    </p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">   	</div><div class="line"><span class="bullet">3. </span>将新的数据拼接起来</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>str = [listArr componentsJoinedByString:@”,”];<br>```</p>
 </li>
 </ol>
-<p>NSSet *set = [NSSet setWithArray: listStrs];<br>    <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">- </span>利用NSArray的containsObjects</div></pre></td></tr></table></figure></p>
-<pre><code> NSMutableArray *listArr = [[NSMutableArray alloc]init];
-for (NSString * newStr in listStrs) {
-    if (![listArr containsObject: newStr]) {
-        [listArr addObject: newStr];
-    }
-}    
-   <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">3. </span>将新的数据拼接起来</div></pre></td></tr></table></figure>
-</code></pre><p> str = [listArr componentsJoinedByString:@”,”];<br> ```</p>
 
       
     </div>
