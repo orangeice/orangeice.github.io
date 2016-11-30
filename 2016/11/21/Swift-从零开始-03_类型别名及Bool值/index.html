@@ -10,26 +10,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
 当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
+typealias AudioSample = UInt16
 定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
+var maxAmplitudeFound =">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 03_类型别名及Bool值">
 <meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-03_类型别名及Bool值/index.html">
 <meta property="og:site_name" content="Chen bin">
 <meta property="og:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
 当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
+typealias AudioSample = UInt16
 定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
+var maxAmplitudeFound =">
 <meta property="og:updated_time" content="2016-11-21T08:18:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 03_类型别名及Bool值">
 <meta name="twitter:description" content="类型别名类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。
 当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
-1typealias AudioSample = UInt16
+typealias AudioSample = UInt16
 定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
-12var maxAmplitudeFoun">
+var maxAmplitudeFound =">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -168,20 +168,33 @@
       
         <h1 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h1><p>类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
 <p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typealias AudioSample = UInt16</div></pre></td></tr></table></figure>
-<p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var maxAmplitudeFound = AudioSample.min</div><div class="line">// maxAmplitudeFound 现在是 0</div></pre></td></tr></table></figure>
-<p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
+<pre><code>typealias AudioSample = UInt16
+</code></pre><p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
+<pre><code>var maxAmplitudeFound = AudioSample.min
+// maxAmplitudeFound 现在是 0
+</code></pre><p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
 <h1 id="Bool值"><a href="#Bool值" class="headerlink" title="Bool值"></a>Bool值</h1><p>Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的（logical），因为它们只能是真或者假。Swift 有两个布尔常量，true和false：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let orangesAreOrange = true</div><div class="line">let turnipsAreDelicious = false</div></pre></td></tr></table></figure>
-<p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if turnipsAreDelicious &#123;</div><div class="line">    println(&quot;Mmm, tasty turnips!&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    println(&quot;Eww, turnips are horrible.&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;Eww, turnips are horrible.&quot;</div></pre></td></tr></table></figure>
-<p>条件语句，例如if，请参考控制流。</p>
+<pre><code>let orangesAreOrange = true
+let turnipsAreDelicious = false
+</code></pre><p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
+<pre><code>if turnipsAreDelicious {
+    println(&quot;Mmm, tasty turnips!&quot;)
+} else {
+    println(&quot;Eww, turnips are horrible.&quot;)
+}
+// 输出 &quot;Eww, turnips are horrible.&quot;
+</code></pre><p>条件语句，例如if，请参考控制流。</p>
 <p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i &#123;</div><div class="line">    // 这个例子不会通过编译，会报错</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然而，下面的例子是合法的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let i = 1</div><div class="line">if i == 1 &#123;</div><div class="line">    // 这个例子会编译成功</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
+<pre><code>let i = 1
+if i {
+    // 这个例子不会通过编译，会报错
+}
+</code></pre><p>然而，下面的例子是合法的：</p>
+<pre><code>let i = 1
+if i == 1 {
+    // 这个例子会编译成功
+}
+</code></pre><p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
 <p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</p>
 
       
@@ -341,7 +354,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
     			</div>
     	</section>
     

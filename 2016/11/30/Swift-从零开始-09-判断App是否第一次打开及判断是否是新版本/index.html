@@ -6,18 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>关于博客 | Chen bin</title>
+  <title>Swift 从零开始 09_判断App是否第一次打开及判断是否是新版本 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从事新工作之后,记录自己的所获所得">
+  <meta name="description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
+
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于博客">
-<meta property="og:url" content="http://yoursite.com/2016/11/21/关于博客/index.html">
+<meta property="og:title" content="Swift 从零开始 09_判断App是否第一次打开及判断是否是新版本">
+<meta property="og:url" content="http://yoursite.com/2016/11/30/Swift-从零开始-09-判断App是否第一次打开及判断是否是新版本/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="从事新工作之后,记录自己的所获所得">
-<meta property="og:updated_time" content="2016-11-21T03:59:42.000Z">
+<meta property="og:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
+
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
+<meta property="og:updated_time" content="2016-11-30T01:47:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于博客">
-<meta name="twitter:description" content="从事新工作之后,记录自己的所获所得">
+<meta name="twitter:title" content="Swift 从零开始 09_判断App是否第一次打开及判断是否是新版本">
+<meta name="twitter:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
+
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBoo">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -136,7 +148,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-关于博客" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-09-判断App是否第一次打开及判断是否是新版本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于博客
+      Swift 从零开始 09_判断App是否第一次打开及判断是否是新版本
     </h1>
   
 
@@ -154,16 +166,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从事新工作之后,记录自己的所获所得</p>
+        <h2 id="1-判断App是否第一次打开"><a href="#1-判断App是否第一次打开" class="headerlink" title="1.判断App是否第一次打开"></a>1.判断App是否第一次打开</h2><pre><code> //App第一次启动调用方法 :didFinishLaunchingWithOptions:
 
+    if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) {
+
+      NSUserDefaults.standardUserDefaults().setBool(true, forKey: &quot;firstLaunch&quot;)
+      print(&quot;App第一次打开&quot;)
+
+      }else{
+
+      print(&quot;App不是第一次打开&quot;)
+    }
+</code></pre><h2 id="2-判断App版本是否是新版本-OC"><a href="#2-判断App版本是否是新版本-OC" class="headerlink" title="2.判断App版本是否是新版本(OC)"></a>2.判断App版本是否是新版本(OC)</h2><pre><code>#pragma mark - 判断是不是新版本,是否需要显示新特性
+- (BOOL)isNewVision {
+    // MARK: - 目标：第一次启动这个应用时，显示新特性界面，以后就直接进入主程序！
+    // 版本号：两个版本号。Info.plist中有对应的版本号
+    // 1. 获取应用当前的版本号
+    // 获取Info.plist文件的所有信息
+    NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
+    // 获取当前版本号
+    NSString *currentBete = infoDict[@&quot;CFBundleShortVersionString&quot;];
+
+    // 2. 获取之前存储的版本号
+    // 获取偏好设置对象
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *oldBete = [defaults objectForKey:@&quot;app_version&quot;];
+
+    // 3. 比较新旧版本号
+    if ([currentBete isEqualToString:oldBete])
+    {
+        //如果新旧版本号相等,直接进入主程序
+        return NO;
+    }else {
+        //如果不相等
+        //获取偏好设置
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //存储
+        [defaults setObject:currentBete forKey:@&quot;app_version&quot;];
+        //立即同步
+        [defaults synchronize];
+        return YES;
+    }
+
+    didFinishLaunchingWithOptions:
+    //设置根控制器(DXGuideController:新特性)
+    if ([self isNewVision]) {
+        self.window.rootViewController = [[DXGuideController alloc] init];
+    }else {
+         self.window.rootViewController = tabBarVC;
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/21/关于博客/" class="archive-article-date">
-  	<time datetime="2016-11-21T02:53:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+      <a href="/2016/11/30/Swift-从零开始-09-判断App是否第一次打开及判断是否是新版本/" class="archive-article-date">
+  	<time datetime="2016-11-30T01:26:12.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
 </a>
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App启动/">App启动</a></li></ul>
+	</div>
+
       
 
       <div class="clearfix"></div>
@@ -174,15 +238,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/21/Swift-从零开始-01_单例/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Swift 从零开始 01_单例
-        
-      </div>
-    </a>
   
+    <a href="/2016/11/22/Swift-从零开始-09_as,as!,as?/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -224,7 +284,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="关于博客" data-title="关于博客" data-url="http://yoursite.com/2016/11/21/关于博客/"></div>
+	<div class="ds-thread" data-thread-key="Swift-从零开始-09-判断App是否第一次打开及判断是否是新版本" data-title="Swift 从零开始 09_判断App是否第一次打开及判断是否是新版本" data-url="http://yoursite.com/2016/11/30/Swift-从零开始-09-判断App是否第一次打开及判断是否是新版本/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

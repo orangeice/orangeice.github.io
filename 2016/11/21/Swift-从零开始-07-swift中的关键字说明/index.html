@@ -9,18 +9,33 @@
   <title>Swift 从零开始 07_swift中的关键字说明(一) | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
-12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
+class PersonInfo {
+    let name = &amp;quot;xiaoming&amp;quot;
+    var age = 18
+    var height = 170
+    var weight = 65
+}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 07_swift中的关键字说明(一)">
 <meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-07-swift中的关键字说明/index.html">
 <meta property="og:site_name" content="Chen bin">
 <meta property="og:description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
-12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
+class PersonInfo {
+    let name = &amp;quot;xiaoming&amp;quot;
+    var age = 18
+    var height = 170
+    var weight = 65
+}">
 <meta property="og:updated_time" content="2016-11-21T08:54:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 07_swift中的关键字说明(一)">
 <meta name="twitter:description" content="1.let关键字用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:
-12345678910111213class PersonInfo &amp;#123;    let name = &amp;quot;xiaoming&amp;quot;    var age = 18    var height = 170">
+class PersonInfo {
+    let name = &amp;quot;xiaoming&amp;quot;
+    var age = 18
+    var height = 170
+    var weight = 65
+}">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -158,74 +173,394 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-let关键字"><a href="#1-let关键字" class="headerlink" title="1.let关键字"></a>1.let关键字</h2><p>用let修饰的变量会是一个不可变的常量, 也就是说不可以对它进行修改, 但如果用let修饰的常量是一个类, 那么我们可以对其所在的属性进行修改, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class PersonInfo &#123;</div><div class="line">    let name = &quot;xiaoming&quot;</div><div class="line">    var age = 18</div><div class="line">    var height = 170</div><div class="line">    var weight = 65</div><div class="line">&#125;</div><div class="line"></div><div class="line">let personInfo = PersonInfo()</div><div class="line"></div><div class="line">personInfo.age += 1</div><div class="line"></div><div class="line">print(&quot;person age is \(personInfo.age).&quot;)</div><div class="line">// 输出的结果为: person age is 19.</div></pre></td></tr></table></figure>
-<p>这里边的name就是不可变的, 如果非要去改变, Xcode会建议你把let修改成var.</p>
+<pre><code>class PersonInfo {
+    let name = &quot;xiaoming&quot;
+    var age = 18
+    var height = 170
+    var weight = 65
+}
+
+let personInfo = PersonInfo()
+
+personInfo.age += 1
+
+print(&quot;person age is \(personInfo.age).&quot;)
+// 输出的结果为: person age is 19.
+</code></pre><p>这里边的name就是不可变的, 如果非要去改变, Xcode会建议你把let修改成var.</p>
 <p>PS: 如果这个时候, 再声明一个person常量去引用personInfo, 那么person的所指向的内存块是和personInfo相同的.</p>
 <h2 id="2-var关键字"><a href="#2-var关键字" class="headerlink" title="2.var关键字"></a>2.var关键字</h2><p>用var关键字声明的变量将会是一个可变的变量, 在这里, 我们并不会用var去引用一个类, 也没有必要, 继续拿上面的例子来说:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class PersonInfo &#123;</div><div class="line">    let name = &quot;xiaoming&quot;</div><div class="line">    var age = 18</div><div class="line">    var height = 170</div><div class="line">    var weight = 65</div><div class="line">&#125;</div><div class="line"></div><div class="line">let personInfo = PersonInfo()</div><div class="line"></div><div class="line">personInfo.age += 1</div><div class="line"></div><div class="line">print(&quot;person age is \(personInfo.age).&quot;)</div></pre></td></tr></table></figure>
-<p>这里面的age就是属于var类型, 在初始化之后, 我们仍然可以给它进行修改.</p>
+<pre><code>class PersonInfo {
+    let name = &quot;xiaoming&quot;
+    var age = 18
+    var height = 170
+    var weight = 65
+}
+
+let personInfo = PersonInfo()
+
+personInfo.age += 1
+
+print(&quot;person age is \(personInfo.age).&quot;)
+</code></pre><p>这里面的age就是属于var类型, 在初始化之后, 我们仍然可以给它进行修改.</p>
 <p>PS: 如果这个时候, 我们用var修饰personMode变量去引用personInfo, 那么personMode和personInfo所指向的内存块并不同, personMode会将personInfo完整的拷贝一份, 然后放在另外一块内存块去管理.</p>
 <h2 id="3-class关键字"><a href="#3-class关键字" class="headerlink" title="3.class关键字"></a>3.class关键字</h2><p>在Swift当中, 我们是使用Class关键字去声明一个类, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class PersonInfo &#123;</div><div class="line">    // class body</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-struct关键字"><a href="#4-struct关键字" class="headerlink" title="4.struct关键字"></a>4.struct关键字</h2><p>在Swift中, 如果我们需要声明一个结构体, 我们就需要使用到struct关键字, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct PersonInfo &#123;</div><div class="line">    // struct body</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="5-enum关键字"><a href="#5-enum关键字" class="headerlink" title="5.enum关键字"></a>5.enum关键字</h2><p>而我们需要声明枚举的时候, 我们就使用enum关键字, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">enum PersonMode &#123;</div><div class="line">    case zhangsan</div><div class="line">    case lisi</div><div class="line">    case wangwu(String)</div><div class="line">    case luoliu(String, Double, Int)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在Swift当中的enum和Objective-C并不一样, Swift的enum不会被隐式赋值为0, 1, 里面的zhangsan就是这个枚举分支的完整值, 并且在Swift中, 我们可以给enum case声明各种类型, 比如里面的case luoliu一样.</p>
+<pre><code>class PersonInfo {
+    // class body
+}
+</code></pre><h2 id="4-struct关键字"><a href="#4-struct关键字" class="headerlink" title="4.struct关键字"></a>4.struct关键字</h2><p>在Swift中, 如果我们需要声明一个结构体, 我们就需要使用到struct关键字, 比如:</p>
+<pre><code>struct PersonInfo {
+    // struct body
+}
+</code></pre><h2 id="5-enum关键字"><a href="#5-enum关键字" class="headerlink" title="5.enum关键字"></a>5.enum关键字</h2><p>而我们需要声明枚举的时候, 我们就使用enum关键字, 比如:</p>
+<pre><code>enum PersonMode {
+    case zhangsan
+    case lisi
+    case wangwu(String)
+    case luoliu(String, Double, Int)
+}
+</code></pre><p>在Swift当中的enum和Objective-C并不一样, Swift的enum不会被隐式赋值为0, 1, 里面的zhangsan就是这个枚举分支的完整值, 并且在Swift中, 我们可以给enum case声明各种类型, 比如里面的case luoliu一样.</p>
 <p>当然, 我们也可以给枚举值默认声明一个值, 但在枚举名之前, 要声明是什么类型, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">enum Numbers: Int &#123;</div><div class="line">    case One = 1, Two, Three, Four</div><div class="line">&#125;</div><div class="line"></div><div class="line">let number = Numbers.One.rawValue</div><div class="line"></div><div class="line">print(number)</div></pre></td></tr></table></figure>
-<h2 id="6-override关键字"><a href="#6-override关键字" class="headerlink" title="6.override关键字"></a>6.override关键字</h2><p>在Swift中, 如果我们要重写某个方法, 或者某个属性的话, 我们需要在重写的变量前增加一个override关键字, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Car &#123;</div><div class="line">    var speed: Int &#123;</div><div class="line">        return 200</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func carSpeed() &#123;</div><div class="line">        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class NewCar: Car &#123;</div><div class="line">    override var speed: Int &#123;</div><div class="line">        return 150</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func carSpeed() &#123;</div><div class="line">        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="7-final关键字"><a href="#7-final关键字" class="headerlink" title="7.final关键字"></a>7.final关键字</h2><p>上面我们介绍了override重写属性或者方法的关键字, 当然有重写, 肯定会有防止重写的关键字, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">class Car &#123;</div><div class="line">    var speed: Int &#123;</div><div class="line">        return 200</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    final var carType: String &#123;</div><div class="line">        return &quot;SUV&quot;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func carSpeed() &#123;</div><div class="line">        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class NewCar: Car &#123;</div><div class="line">    override var speed: Int &#123;</div><div class="line">        return 150</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func carSpeed() &#123;</div><div class="line">        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)</div><div class="line">    &#125;</div><div class="line">    override var carType: String &#123;</div><div class="line">        return &quot;MPV&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这个时候, 下面这个override var carType: String&#123;&#125;属性就会报Var override a &quot;final&quot; var 的错误.</div></pre></td></tr></table></figure>
-<h2 id="8-subscript关键字"><a href="#8-subscript关键字" class="headerlink" title="8.subscript关键字"></a>8.subscript关键字</h2><p>所谓的下标, 其实就可以快捷方式的设置或者获取对应的属性, 而不需要调用对应的方法去获取或者存储, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">struct Animal &#123;</div><div class="line">    let catType: String</div><div class="line"></div><div class="line">    subscript(animalName: String) -&gt; String &#123;</div><div class="line">        return &quot;catType is \(animalName).&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let tiger = Animal(catType: &quot;Tiger&quot;)</div><div class="line"></div><div class="line">print(tiger)</div><div class="line">// 输出的结果为: Animal(catType: &quot;Tiger&quot;)</div></pre></td></tr></table></figure>
-<h2 id="9-mutating关键字"><a href="#9-mutating关键字" class="headerlink" title="9.mutating关键字"></a>9.mutating关键字</h2><p>作用:写在func前面,以便于让func可以修改struct和protocol的extension中的成员的值。 如果func前面不加mutating,struct和protocol的extension中的成员的值便被保护起来,不能修改.<br><br>mutating这个关键字指的是可变, <font color="orangered">只能用在struct和enum当中,</font>为的就是可以方便我们在特定环境下, 需要在struct中修改对应的属性值, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">struct Animal &#123;</div><div class="line">    let catType: String</div><div class="line"></div><div class="line">    subscript(animalName: String) -&gt; String &#123;</div><div class="line">        return &quot;catType is \(animalName).&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let tiger = Animal(catType: &quot;Tiger&quot;)</div><div class="line"></div><div class="line">print(tiger)</div><div class="line">// 输出的结果为: Animal(catType: &quot;Tiger&quot;)</div></pre></td></tr></table></figure>
-<h2 id="10-static"><a href="#10-static" class="headerlink" title="10.static"></a>10.static</h2><p>用static修饰的变量或者方法, 就会变成静态变量和静态方法, 并且保证在对应的作用域当中只有一份, 同时也不需要依赖实例化, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Animals &#123;</div><div class="line">    static var catName: String!</div><div class="line"></div><div class="line"></div><div class="line">    func catTypeName() &#123;</div><div class="line">        _ = &quot;Tiger&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Animals.catName = &quot;Tiger&quot;</div><div class="line"></div><div class="line">print(Animals.catName)</div><div class="line"></div><div class="line">// 输出的结果为: Tiger</div></pre></td></tr></table></figure>
-<font color="orangered" size="3">static关键字和class关键字的区别</font>
+<pre><code>enum Numbers: Int {
+    case One = 1, Two, Three, Four
+}
+
+let number = Numbers.One.rawValue
+
+print(number)
+</code></pre><h2 id="6-override关键字"><a href="#6-override关键字" class="headerlink" title="6.override关键字"></a>6.override关键字</h2><p>在Swift中, 如果我们要重写某个方法, 或者某个属性的话, 我们需要在重写的变量前增加一个override关键字, 比如:</p>
+<pre><code>class Car {
+    var speed: Int {
+        return 200
+    }
+
+    func carSpeed() {
+        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)
+    }
+}
+
+class NewCar: Car {
+    override var speed: Int {
+        return 150
+    }
+
+    override func carSpeed() {
+        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)
+    }
+}
+</code></pre><h2 id="7-final关键字"><a href="#7-final关键字" class="headerlink" title="7.final关键字"></a>7.final关键字</h2><p>上面我们介绍了override重写属性或者方法的关键字, 当然有重写, 肯定会有防止重写的关键字, 比如:</p>
+<pre><code>class Car {
+    var speed: Int {
+        return 200
+    }
+
+    final var carType: String {
+        return &quot;SUV&quot;
+    }
+
+    func carSpeed() {
+        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)
+    }
+}
+
+class NewCar: Car {
+    override var speed: Int {
+        return 150
+    }
+
+    override func carSpeed() {
+        print(&quot;Car max speed is \(speed)km 1 hours.&quot;)
+    }
+    override var carType: String {
+        return &quot;MPV&quot;
+    }
+}
+
+// 这个时候, 下面这个override var carType: String{}属性就会报Var override a &quot;final&quot; var 的错误.
+</code></pre><h2 id="8-subscript关键字"><a href="#8-subscript关键字" class="headerlink" title="8.subscript关键字"></a>8.subscript关键字</h2><p>所谓的下标, 其实就可以快捷方式的设置或者获取对应的属性, 而不需要调用对应的方法去获取或者存储, 比如:</p>
+<pre><code>struct Animal {
+    let catType: String
+
+    subscript(animalName: String) -&gt; String {
+        return &quot;catType is \(animalName).&quot;
+    }
+}
+
+let tiger = Animal(catType: &quot;Tiger&quot;)
+
+print(tiger)
+// 输出的结果为: Animal(catType: &quot;Tiger&quot;)
+</code></pre><h2 id="9-mutating关键字"><a href="#9-mutating关键字" class="headerlink" title="9.mutating关键字"></a>9.mutating关键字</h2><p>作用:写在func前面,以便于让func可以修改struct和protocol的extension中的成员的值。 如果func前面不加mutating,struct和protocol的extension中的成员的值便被保护起来,不能修改.<br><br>mutating这个关键字指的是可变, <font color="orangered">只能用在struct和enum当中,</font>为的就是可以方便我们在特定环境下, 需要在struct中修改对应的属性值, 比如:</p>
+<pre><code>struct Animal {
+    let catType: String
+
+    subscript(animalName: String) -&gt; String {
+        return &quot;catType is \(animalName).&quot;
+    }
+}
+
+let tiger = Animal(catType: &quot;Tiger&quot;)
+
+print(tiger)
+// 输出的结果为: Animal(catType: &quot;Tiger&quot;)
+</code></pre><h2 id="10-static"><a href="#10-static" class="headerlink" title="10.static"></a>10.static</h2><p>用static修饰的变量或者方法, 就会变成静态变量和静态方法, 并且保证在对应的作用域当中只有一份, 同时也不需要依赖实例化, 比如:</p>
+<pre><code>class Animals {
+    static var catName: String!
+
+
+    func catTypeName() {
+        _ = &quot;Tiger&quot;
+    }
+}
+
+Animals.catName = &quot;Tiger&quot;
+
+print(Animals.catName)
+
+// 输出的结果为: Tiger
+</code></pre><font color="orangered" size="3">static关键字和class关键字的区别</font>
 
 <p>在方法的func关键字之前加上关键字static或者class都可以用于指定类方法.<br>不同的是用class关键字指定的类方法可以被子类重写, 如下:<br>    override class func work() {<br>    print(“Teacher: University Teacher”)<br>}</p>
 <p>但是用static关键字指定的类方法是不能被子类重写的, 根据报错信息: Class method overrides a ‘final’ class method.<br>我们可以知道被static指定的类方法包含final关键字的特性–防止被重写. </p>
 <h2 id="11-lazy关键字"><a href="#11-lazy关键字" class="headerlink" title="11.lazy关键字"></a>11.lazy关键字</h2><p>就是swift中的懒加载<br><br>被lazy关键修饰的变量, 只有在第一次被调用的时候才会去计算它初始化值的属性, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class SuvCar &#123;</div><div class="line">    var BydSuv = &quot;S7&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MpvCar  &#123;</div><div class="line">    lazy var suvCar = SuvCar()</div><div class="line">    var mpvCars = [String]()</div><div class="line">&#125;</div><div class="line"></div><div class="line">let mpvCar = MpvCar()</div><div class="line"></div><div class="line">mpvCar.mpvCars.append(&quot;CarOne&quot;)</div><div class="line">mpvCar.mpvCars.append(&quot;CarTwo&quot;)</div><div class="line"></div><div class="line">print(&quot;I have \(mpvCar.mpvCars.count) MPV.&quot;)</div><div class="line">// 输出的结果为: I have 2 MPV.</div><div class="line"></div><div class="line">print(&quot;I have a SUV Car, is \(mpvCar.suvCar.BydSuv)&quot;)</div><div class="line">// 输出的结果为: I have a SUV Car, is S7</div></pre></td></tr></table></figure>
-<p><font color="orangered" size="3">在这里需要注意两点:</font><br><br><br>1.用lazy修饰的变量必须是用var声明的, 因为属性的初始值可能在实例构造完成之后才会得到。而常量属性在构造过程完成之前必须要有初始值，因此无法声明成延迟属性。</p>
+<pre><code>class SuvCar {
+    var BydSuv = &quot;S7&quot;
+}
+
+class MpvCar  {
+    lazy var suvCar = SuvCar()
+    var mpvCars = [String]()
+}
+
+let mpvCar = MpvCar()
+
+mpvCar.mpvCars.append(&quot;CarOne&quot;)
+mpvCar.mpvCars.append(&quot;CarTwo&quot;)
+
+print(&quot;I have \(mpvCar.mpvCars.count) MPV.&quot;)
+// 输出的结果为: I have 2 MPV.
+
+print(&quot;I have a SUV Car, is \(mpvCar.suvCar.BydSuv)&quot;)
+// 输出的结果为: I have a SUV Car, is S7
+</code></pre><p><font color="orangered" size="3">在这里需要注意两点:</font><br><br><br>1.用lazy修饰的变量必须是用var声明的, 因为属性的初始值可能在实例构造完成之后才会得到。而常量属性在构造过程完成之前必须要有初始值，因此无法声明成延迟属性。</p>
 <p>2.如果被lazy修饰的变量没有在初始化时就被多个线程调用, 那就没有办法保证它只被初始化一次了.</p>
 <h2 id="12-init关键字"><a href="#12-init关键字" class="headerlink" title="12.init关键字"></a>12.init关键字</h2><p>在Swift 中也有对应的构造器, 来看看:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Player &#123;</div><div class="line">    var coinsInPurse: Int</div><div class="line"></div><div class="line">    init(coins: Int) &#123;</div><div class="line">        coinsInPurse = 1000</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样子coinsInPurse的值就为1000了.</p>
+<pre><code>class Player {
+    var coinsInPurse: Int
+
+    init(coins: Int) {
+        coinsInPurse = 1000
+    }
+}
+</code></pre><p>这样子coinsInPurse的值就为1000了.</p>
 <p>还有一种用法, 就是在init后面加个”?”号, 表明该构造器可以允许失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">struct Animal &#123;</div><div class="line">    let species: String</div><div class="line">    init?(species: String) &#123;</div><div class="line">        if species.isEmpty &#123; return nil &#125;</div><div class="line">        self.species = species</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let someCreature = Animal(species: &quot;Giraffe&quot;)</div><div class="line"></div><div class="line">if let giraffe = someCreature &#123;</div><div class="line">    print(&quot;An animal was initialized with a species of \(giraffe.species)&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let anonymousCreature = Animal(species: &quot;&quot;)</div><div class="line"></div><div class="line">if anonymousCreature == nil &#123;</div><div class="line">    print(&quot;The anonymous creature could not be initialized&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="13-convenient关键字"><a href="#13-convenient关键字" class="headerlink" title="13.convenient关键字"></a>13.convenient关键字</h2><p>该关键字是用来修饰init的, 经过convenient修饰的init方法, 表明该init方式是比较次要, 辅助型的, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Food &#123;</div><div class="line">    var name: String</div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">    convenience init() &#123;</div><div class="line">        self.init(name: &quot;[Unnamed]&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="14-required关键字"><a href="#14-required关键字" class="headerlink" title="14.required关键字"></a>14.required关键字</h2><p>required也是用来修饰init方法的, 用required修饰说明该构造方法是必须实现的, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class SomeClass &#123;</div><div class="line">    required init() &#123;</div><div class="line">        // init body</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>PS: 如果一个子类继承了父类required修饰的init方法, 就必须得去实现该init方法, 但子类可以觉得它之后继承于它的子类可以实现该方法.</p>
+<pre><code>struct Animal {
+    let species: String
+    init?(species: String) {
+        if species.isEmpty { return nil }
+        self.species = species
+    }
+}
+
+let someCreature = Animal(species: &quot;Giraffe&quot;)
+
+if let giraffe = someCreature {
+    print(&quot;An animal was initialized with a species of \(giraffe.species)&quot;)
+}
+
+let anonymousCreature = Animal(species: &quot;&quot;)
+
+if anonymousCreature == nil {
+    print(&quot;The anonymous creature could not be initialized&quot;)
+}
+</code></pre><h2 id="13-convenient关键字"><a href="#13-convenient关键字" class="headerlink" title="13.convenient关键字"></a>13.convenient关键字</h2><p>该关键字是用来修饰init的, 经过convenient修饰的init方法, 表明该init方式是比较次要, 辅助型的, 比如:</p>
+<pre><code>class Food {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    convenience init() {
+        self.init(name: &quot;[Unnamed]&quot;)
+    }
+}
+</code></pre><h2 id="14-required关键字"><a href="#14-required关键字" class="headerlink" title="14.required关键字"></a>14.required关键字</h2><p>required也是用来修饰init方法的, 用required修饰说明该构造方法是必须实现的, 比如:</p>
+<pre><code>class SomeClass {
+    required init() {
+        // init body
+    }
+}
+</code></pre><p>PS: 如果一个子类继承了父类required修饰的init方法, 就必须得去实现该init方法, 但子类可以觉得它之后继承于它的子类可以实现该方法.</p>
 <h2 id="15-deinit关键字"><a href="#15-deinit关键字" class="headerlink" title="15.deinit关键字"></a>15.deinit关键字</h2><p>在Swift中, 有一个类似dealloc方法, 就是deinit, 但有一些区别, dealloc方法是在引用计数为0的时候, 也就是被释放的时候才会调用, 而deinit是在实例不再引用时自动调用, 并且不用手动去管理引用计数, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">class Bank &#123;</div><div class="line">    static var coinsInBank = 10_000</div><div class="line"></div><div class="line">    static func vendCoins(var numberOfConisToVend: Int) -&gt; Int &#123;</div><div class="line">        numberOfConisToVend = min(numberOfConisToVend, coinsInBank)</div><div class="line"></div><div class="line">        coinsInBank -= numberOfConisToVend</div><div class="line"></div><div class="line">        return numberOfConisToVend</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static func receiveCoins(coins: Int) &#123;</div><div class="line">        //print(&quot;coinsInBank = \(coinsInBank)&quot;)</div><div class="line"></div><div class="line">        coinsInBank += coins</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Player &#123;</div><div class="line">    var coinsInPurse: Int</div><div class="line"></div><div class="line">    init(coins: Int) &#123;</div><div class="line">        coinsInPurse = Bank.vendCoins(coins)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func winCoins(coins: Int) &#123;</div><div class="line">        coinsInPurse += Bank.vendCoins(coins)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    deinit &#123;</div><div class="line">        Bank.receiveCoins(coinsInPurse)</div><div class="line"></div><div class="line">        print(&quot;Player is nil.&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var playerOne: Player? = Player(coins: 100)</div><div class="line"></div><div class="line">print(&quot;A new player has joined the game with \(playerOne!.coinsInPurse) coins.&quot;)</div><div class="line">// 输出的结果为: A new player has joined the game with 100 coins</div><div class="line"></div><div class="line">print(&quot;There are now \(Bank.coinsInBank) coins left in the bank.&quot;)</div><div class="line">// 输出的结果为: There are now 9900 coins left in the bank.</div><div class="line"></div><div class="line">playerOne?.winCoins(2_000)</div><div class="line"></div><div class="line">print(&quot;PlayerOne wn 2000 coins &amp; now has \(playerOne!.coinsInPurse) coins.&quot;)</div><div class="line">// 输出的结果为: PlayerOne wn 2000 coins &amp; now has 2100 coins.</div><div class="line"></div><div class="line">print(&quot;The bank now only has \(Bank.coinsInBank) coins left.&quot;)</div><div class="line">// 输出的结果为: The bank now only has 7900 coins left.</div><div class="line"></div><div class="line">playerOne = nil</div><div class="line">// 这个时候就会去调用deinit方法, 输出Player is nil.</div></pre></td></tr></table></figure>
-<h2 id="16-is关键字"><a href="#16-is关键字" class="headerlink" title="16.is关键字"></a>16.is关键字</h2><p>在Swift中, is关键字是用来判断类型所使用的, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">let number = [&quot;xiaoming&quot;, 18]</div><div class="line"></div><div class="line">for item in number &#123;</div><div class="line">    if item is Int &#123;</div><div class="line">        print(&quot;item is Int type.&quot;)</div><div class="line"></div><div class="line">    &#125; else if item is String &#123;</div><div class="line">        print(&quot;item is String type&quot;)</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 输出的结果为: </div><div class="line">// item is String type.</div><div class="line">// item is Int type.</div></pre></td></tr></table></figure>
-<p>我们可以遍历一个[NSObject]类型的数组, 判断里面各元素的类型</p>
+<pre><code>class Bank {
+    static var coinsInBank = 10_000
+
+    static func vendCoins(var numberOfConisToVend: Int) -&gt; Int {
+        numberOfConisToVend = min(numberOfConisToVend, coinsInBank)
+
+        coinsInBank -= numberOfConisToVend
+
+        return numberOfConisToVend
+    }
+
+    static func receiveCoins(coins: Int) {
+        //print(&quot;coinsInBank = \(coinsInBank)&quot;)
+
+        coinsInBank += coins
+    }
+}
+
+class Player {
+    var coinsInPurse: Int
+
+    init(coins: Int) {
+        coinsInPurse = Bank.vendCoins(coins)
+    }
+
+    func winCoins(coins: Int) {
+        coinsInPurse += Bank.vendCoins(coins)
+    }
+
+    deinit {
+        Bank.receiveCoins(coinsInPurse)
+
+        print(&quot;Player is nil.&quot;)
+    }
+}
+
+var playerOne: Player? = Player(coins: 100)
+
+print(&quot;A new player has joined the game with \(playerOne!.coinsInPurse) coins.&quot;)
+// 输出的结果为: A new player has joined the game with 100 coins
+
+print(&quot;There are now \(Bank.coinsInBank) coins left in the bank.&quot;)
+// 输出的结果为: There are now 9900 coins left in the bank.
+
+playerOne?.winCoins(2_000)
+
+print(&quot;PlayerOne wn 2000 coins &amp; now has \(playerOne!.coinsInPurse) coins.&quot;)
+// 输出的结果为: PlayerOne wn 2000 coins &amp; now has 2100 coins.
+
+print(&quot;The bank now only has \(Bank.coinsInBank) coins left.&quot;)
+// 输出的结果为: The bank now only has 7900 coins left.
+
+playerOne = nil
+// 这个时候就会去调用deinit方法, 输出Player is nil.
+</code></pre><h2 id="16-is关键字"><a href="#16-is关键字" class="headerlink" title="16.is关键字"></a>16.is关键字</h2><p>在Swift中, is关键字是用来判断类型所使用的, 比如:</p>
+<pre><code>let number = [&quot;xiaoming&quot;, 18]
+
+for item in number {
+    if item is Int {
+        print(&quot;item is Int type.&quot;)
+
+    } else if item is String {
+        print(&quot;item is String type&quot;)
+
+    }
+}
+
+// 输出的结果为: 
+// item is String type.
+// item is Int type.
+</code></pre><p>我们可以遍历一个[NSObject]类型的数组, 判断里面各元素的类型</p>
 <h2 id="17-throw-do-catch关键字"><a href="#17-throw-do-catch关键字" class="headerlink" title="17.throw,do-catch关键字"></a>17.throw,do-catch关键字</h2><p>在Swift 2.0之前, Swift是没有自带的错误信息处理方法, 在2.0更新之后就有了错误信息的处理方法, 让我们来看看.</p>
 <p>在这里我们会使用到一个新的语句do-catch, 这个语句和Switch-case有些类似, 但唯独有一点不太一样的就是, 在do-catch语句中需要使用到try关键字, 而Switch-case则不需要, 好了, 下面让我们来看看.</p>
 <p>首先我们需要定义一个ErrorType的枚举</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">enum getError: ErrorType &#123;</div><div class="line">    case ErrorOne</div><div class="line">    case ErrorTwo</div><div class="line">    case ErrorThree</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后我们来写一个方法, 用来获取错误类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func doDangerousStuff() throws &#123;</div><div class="line"></div><div class="line">    throw getError.ErrorOne</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后我们使用do-catch语句来获取对应的错误类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">do &#123;</div><div class="line">    try doDangerousStuff()</div><div class="line"></div><div class="line">&#125; catch getError.ErrorOne &#123;</div><div class="line"></div><div class="line">    print(getError.ErrorOne)</div><div class="line">&#125; catch getError.ErrorTwo &#123;</div><div class="line"></div><div class="line">    print(getError.ErrorTwo)</div><div class="line">&#125; catch getError.ErrorThree &#123;</div><div class="line"></div><div class="line">    print(getError.ErrorThree)</div><div class="line">&#125;</div><div class="line">//输出结果为: ErrorOne</div></pre></td></tr></table></figure>
-<h2 id="18-extension关键字"><a href="#18-extension关键字" class="headerlink" title="18.extension关键字"></a>18.extension关键字</h2><p>extension的作用是在不改变原来的类型或者协议基础下增加新的属性或者方法, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">    var name = &quot;xiaoming&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension Person &#123;</div><div class="line">    var age: Int &#123; return 20 &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let person = Person()</div><div class="line"></div><div class="line">print(&quot;person name is \(person.name), age is \(person.age).&quot;)</div><div class="line"></div><div class="line">// 输出的结果为:</div><div class="line">// person name is xiaoming, age is 20.</div></pre></td></tr></table></figure>
-<h2 id="19-protocol关键字"><a href="#19-protocol关键字" class="headerlink" title="19.protocol关键字"></a>19.protocol关键字</h2><p>protocol关键字在Swift中也是属于协议的意思, 所谓的协议就是约束对象, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">protocol Person &#123;</div><div class="line">    var name: String &#123; get &#125;</div><div class="line">    var age: String &#123; get &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Xiaoming: Person &#123;</div><div class="line">    var name: String &#123; return &quot;xiaoming&quot; &#125;</div><div class="line">    var age: String &#123; return &quot;20&quot; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Laozhang: Person &#123;</div><div class="line">    var name: String</div><div class="line">    var age: String</div><div class="line"></div><div class="line">    init(name: String, age: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="20-public关键字"><a href="#20-public关键字" class="headerlink" title="20.public关键字"></a>20.public关键字</h2><p>public: 指的是可以访问在一个模块内的任何实体, 也可以通过导入该模块来访问, 也就是我们经常在Objective-C中经常需要导入的.h文件中的方法, 该关键字可以用来修饰变量, 方法, 类, 枚举, 结构体等等之类, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public struct Person &#123;</div><div class="line">    // struct body</div><div class="line">&#125;</div><div class="line"></div><div class="line">public enum CompassPoint &#123;</div><div class="line">    // enum body</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class SomePublecClass &#123;&#125;</div><div class="line"></div><div class="line">public var somePublecVariable = 0</div></pre></td></tr></table></figure>
-<h2 id="21-internal关键字"><a href="#21-internal关键字" class="headerlink" title="21.internal关键字"></a>21.internal关键字</h2><p>internal: 指的是可以访问同一模块源文件中得任何实体, 但不能从模块的外部去访问该源文件中得实体, 同样, internal也可以修饰变量, 方法, 类, 枚举, 结构体等等之类等, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">internal struct Person &#123;</div><div class="line">    // struct body</div><div class="line">&#125;</div><div class="line"></div><div class="line">internal enum CompassPoint &#123;</div><div class="line">    // enum body</div><div class="line">&#125;</div><div class="line"></div><div class="line">internal class SomePublecClass &#123;&#125;</div><div class="line"></div><div class="line">internal var somePublecVariable = 0</div></pre></td></tr></table></figure>
-<h2 id="22-private关键字"><a href="#22-private关键字" class="headerlink" title="22.private关键字"></a>22.private关键字</h2><p>private: 指的是限制实体时能在源文件内部使用, 外部不能访问, private也同样可以用来修饰变量, 方法, 类, 枚举, 结构体等等之类, 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private struct Person &#123;</div><div class="line">    // struct body</div><div class="line">&#125;</div><div class="line"></div><div class="line">private enum CompassPoint &#123;</div><div class="line">    // enum body</div><div class="line">&#125;</div><div class="line"></div><div class="line">private class SomePublecClass &#123;&#125;</div><div class="line"></div><div class="line">private var somePublecVariable = 0</div></pre></td></tr></table></figure>
+<pre><code>enum getError: ErrorType {
+    case ErrorOne
+    case ErrorTwo
+    case ErrorThree
+}
+</code></pre><p>然后我们来写一个方法, 用来获取错误类型</p>
+<pre><code>func doDangerousStuff() throws {
 
+    throw getError.ErrorOne
+}
+</code></pre><p>最后我们使用do-catch语句来获取对应的错误类型</p>
+<pre><code>do {
+    try doDangerousStuff()
+
+} catch getError.ErrorOne {
+
+    print(getError.ErrorOne)
+} catch getError.ErrorTwo {
+
+    print(getError.ErrorTwo)
+} catch getError.ErrorThree {
+
+    print(getError.ErrorThree)
+}
+//输出结果为: ErrorOne
+</code></pre><h2 id="18-extension关键字"><a href="#18-extension关键字" class="headerlink" title="18.extension关键字"></a>18.extension关键字</h2><p>extension的作用是在不改变原来的类型或者协议基础下增加新的属性或者方法, 比如:</p>
+<pre><code>class Person {
+    var name = &quot;xiaoming&quot;
+}
+
+extension Person {
+    var age: Int { return 20 }
+}
+
+let person = Person()
+
+print(&quot;person name is \(person.name), age is \(person.age).&quot;)
+
+// 输出的结果为:
+// person name is xiaoming, age is 20.
+</code></pre><h2 id="19-protocol关键字"><a href="#19-protocol关键字" class="headerlink" title="19.protocol关键字"></a>19.protocol关键字</h2><p>protocol关键字在Swift中也是属于协议的意思, 所谓的协议就是约束对象, 比如:</p>
+<pre><code>protocol Person {
+    var name: String { get }
+    var age: String { get }
+}
+
+class Xiaoming: Person {
+    var name: String { return &quot;xiaoming&quot; }
+    var age: String { return &quot;20&quot; }
+}
+
+class Laozhang: Person {
+    var name: String
+    var age: String
+
+    init(name: String, age: String) {
+        self.name = name
+        self.age = age
+    }
+}
+</code></pre><h2 id="20-public关键字"><a href="#20-public关键字" class="headerlink" title="20.public关键字"></a>20.public关键字</h2><p>public: 指的是可以访问在一个模块内的任何实体, 也可以通过导入该模块来访问, 也就是我们经常在Objective-C中经常需要导入的.h文件中的方法, 该关键字可以用来修饰变量, 方法, 类, 枚举, 结构体等等之类, 比如:</p>
+<pre><code>public struct Person {
+    // struct body
+}
+
+public enum CompassPoint {
+    // enum body
+}
+
+public class SomePublecClass {}
+
+public var somePublecVariable = 0
+</code></pre><h2 id="21-internal关键字"><a href="#21-internal关键字" class="headerlink" title="21.internal关键字"></a>21.internal关键字</h2><p>internal: 指的是可以访问同一模块源文件中得任何实体, 但不能从模块的外部去访问该源文件中得实体, 同样, internal也可以修饰变量, 方法, 类, 枚举, 结构体等等之类等, 比如:</p>
+<pre><code>internal struct Person {
+    // struct body
+}
+
+internal enum CompassPoint {
+    // enum body
+}
+
+internal class SomePublecClass {}
+
+internal var somePublecVariable = 0
+</code></pre><h2 id="22-private关键字"><a href="#22-private关键字" class="headerlink" title="22.private关键字"></a>22.private关键字</h2><p>private: 指的是限制实体时能在源文件内部使用, 外部不能访问, private也同样可以用来修饰变量, 方法, 类, 枚举, 结构体等等之类, 比如:</p>
+<pre><code>private struct Person {
+    // struct body
+}
+
+private enum CompassPoint {
+    // enum body
+}
+
+private class SomePublecClass {}
+
+private var somePublecVariable = 0
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">
@@ -383,7 +718,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a>
     			</div>
     	</section>
     
