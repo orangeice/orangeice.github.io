@@ -12,7 +12,7 @@
 
 1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
 首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
+121，和 &quot;as&quot; 右边类型一致">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解">
 <meta property="og:url" content="http://yoursite.com/2016/11/22/Swift-从零开始-09_as,as!,as">
@@ -21,7 +21,7 @@
 
 1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
 首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
+121，和 &quot;as&quot; 右边类型一致">
 <meta property="og:updated_time" content="2016-11-22T03:25:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 09_as,as!,as? 三种类型转换操作符使用详解">
@@ -29,7 +29,7 @@
 
 1.as使用场合摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。
 首先是运行时就不多说了，重要的是 as 应用条件有2种情况： 
-1，和 &amp;quot;as&amp;quot">
+121，和 &quot;as&quot; 右边类型一致">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -170,54 +170,19 @@
 
 <h3 id="1-as使用场合"><a href="#1-as使用场合" class="headerlink" title="1.as使用场合"></a>1.as使用场合</h3><p>摘自中文api的话：仅当一个值的类型在运行时（runtime）和as模式右边的指定类型一致或者是该类型的子类的情况下，才会匹配这个值。如果匹配成功，被匹配的值的类型被转换成as模式左边指定的模式。</p>
 <p>首先是运行时就不多说了，重要的是 as 应用条件有2种情况： </p>
-<pre><code>1，和 &quot;as&quot; 右边类型一致
-2，是右边类型的子类（这种情况在Java里叫向上转型）
-</code></pre><p>示例代码:</p>
-<pre><code>claa Animal {}
-class Dog: Animal{}
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>，和 <span class="string">"as"</span> 右边类型一致</div><div class="line"><span class="number">2</span>，是右边类型的子类（这种情况在Java里叫向上转型）</div></pre></td></tr></table></figure>
+<p>示例代码:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">claa Animal &#123;&#125;</div><div class="line"><span class="keyword">class</span> <span class="title">Dog</span>: <span class="title">Animal</span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> a = Animal()</div><div class="line">a <span class="keyword">as</span> Animal    <span class="comment">// a和右边Animal类型一致,编译成功</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> d = Dog()</div><div class="line">d <span class="keyword">as</span> Animal    <span class="comment">// d是右边Animal的子类,编译成功</span></div></pre></td></tr></table></figure>
+<p><font color="orangered" size="3">少数用法:</font><br><br>(1) 消除二义性,,数值类型转换</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> num1 = <span class="number">42</span> <span class="keyword">as</span> CGFloat</div><div class="line"><span class="keyword">let</span> num2 = <span class="number">42</span> <span class="keyword">as</span> <span class="keyword">Int</span></div><div class="line"><span class="keyword">let</span> num3 = <span class="number">42.5</span> <span class="keyword">as</span> <span class="keyword">Int</span></div><div class="line"><span class="keyword">let</span> num4 = (<span class="number">42</span> / <span class="number">2</span>) <span class="keyword">as</span> <span class="keyword">Double</span></div></pre></td></tr></table></figure>
+<p>(2) switch语句中进行模式匹配<br>如果不知道一个对象是什么类型，你可以通过switch语法检测它的类型，并且尝试在不同的情况下使用对应的类型进行相应的处理。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> animal &#123;</div><div class="line">	<span class="keyword">case</span> <span class="keyword">let</span> cat <span class="keyword">as</span> <span class="type">Cat</span>:</div><div class="line">    	<span class="built_in">print</span>(<span class="string">"如果是Cat类型对象，则做相应处理"</span>)</div><div class="line">	<span class="keyword">case</span> <span class="keyword">let</span> dog <span class="keyword">as</span> <span class="type">Dog</span>:</div><div class="line">    	<span class="built_in">print</span>(<span class="string">"如果是Dog类型对象，则做相应处理"</span>)</div><div class="line">	<span class="keyword">default</span>: <span class="keyword">break</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-as-适用场合"><a href="#2-as-适用场合" class="headerlink" title="2.as!适用场合"></a>2.as!适用场合</h3><p>上例中 第二种情况，左边是右边类型的子类,如果碰到 as 左边类型是右边类型的父类则会报错！（as不可以用于父类转子类，用java话说，不支持向下转型），由此可用as！(强转) ,如果转换失败会报 runtime 运行错误。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Animal</span> &#123;&#125;</div><div class="line"><span class="keyword">class</span> <span class="title">Dog</span>: <span class="title">Animal</span> &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> a: Animal = Dog()</div><div class="line"></div><div class="line">a <span class="keyword">as</span>! Dog		<span class="comment">//编译成功</span></div><div class="line">a <span class="keyword">as</span> Dog		<span class="comment">//报错 -- 编译器也会提示你用as！, as！强转如果类型不符合会报错。</span></div></pre></td></tr></table></figure>
+<h3 id="3-as-适用场合"><a href="#3-as-适用场合" class="headerlink" title="3.as?适用场合"></a>3.as?适用场合</h3><p>as? 和 as! 操作符的转换规则完全一样。但 as? 如果转换不成功的时候便会返回一个 nil 对象。成功的话返回可选类型值（optional），需要我们拆包使用。<br>由于 as? 在转换失败的时候也不会出现错误，所以对于如果能确保100%会成功的转换则可使用 as!，否则使用 as?</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> anima<span class="variable">l:Animal</span> = Cat()</div><div class="line"> </div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">cat</span> = animal <span class="keyword">as</span>? Cat &#123;</div><div class="line">    <span class="keyword">print</span>(<span class="string">"cat is not nil"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">print</span>(<span class="string">"cat is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span>: <span class="type">Animal &#123;&#125;</span></span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>: <span class="type">Animal &#123;&#125;</span></span></div><div class="line"></div><div class="line">let animal: Animal = Cat()</div><div class="line">animal <span class="keyword">as</span>? Dog	<span class="comment">//取到的是nil</span></div><div class="line">animal <span class="keyword">as</span>! Dog	<span class="comment">//运行时报错</span></div></pre></td></tr></table></figure>
 
-let a = Animal()
-a as Animal    // a和右边Animal类型一致,编译成功
-
-let d = Dog()
-d as Animal    // d是右边Animal的子类,编译成功
-</code></pre><p><font color="orangered" size="3">少数用法:</font><br><br>(1) 消除二义性,,数值类型转换</p>
-<pre><code>let num1 = 42 as CGFloat
-let num2 = 42 as Int
-let num3 = 42.5 as Int
-let num4 = (42 / 2) as Double
-</code></pre><p>(2) switch语句中进行模式匹配<br>如果不知道一个对象是什么类型，你可以通过switch语法检测它的类型，并且尝试在不同的情况下使用对应的类型进行相应的处理。</p>
-<pre><code>switch animal {
-    case let cat as Cat:
-        print(&quot;如果是Cat类型对象，则做相应处理&quot;)
-    case let dog as Dog:
-        print(&quot;如果是Dog类型对象，则做相应处理&quot;)
-    default: break
-}
-</code></pre><h3 id="2-as-适用场合"><a href="#2-as-适用场合" class="headerlink" title="2.as!适用场合"></a>2.as!适用场合</h3><p>上例中 第二种情况，左边是右边类型的子类,如果碰到 as 左边类型是右边类型的父类则会报错！（as不可以用于父类转子类，用java话说，不支持向下转型），由此可用as！(强转) ,如果转换失败会报 runtime 运行错误。</p>
-<pre><code>class Animal {}
-class Dog: Animal {}
-
-let a: Animal = Dog()
-
-a as! Dog        //编译成功
-a as Dog        //报错 -- 编译器也会提示你用as！, as！强转如果类型不符合会报错。
-</code></pre><h3 id="3-as-适用场合"><a href="#3-as-适用场合" class="headerlink" title="3.as?适用场合"></a>3.as?适用场合</h3><p>as? 和 as! 操作符的转换规则完全一样。但 as? 如果转换不成功的时候便会返回一个 nil 对象。成功的话返回可选类型值（optional），需要我们拆包使用。<br>由于 as? 在转换失败的时候也不会出现错误，所以对于如果能确保100%会成功的转换则可使用 as!，否则使用 as?</p>
-<pre><code>let animal:Animal = Cat()
-
-if let cat = animal as? Cat {
-    print(&quot;cat is not nil&quot;)
-} else {
-    print(&quot;cat is nil&quot;)
-}
-</code></pre><pre><code>class Animal {}
-class Cat: Animal {}
-class Dog: Animal {}
-
-let animal: Animal = Cat()
-animal as? Dog    //取到的是nil
-animal as! Dog    //运行时报错
-</code></pre>
       
     </div>
     <div class="article-info article-info-index">

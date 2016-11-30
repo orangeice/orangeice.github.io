@@ -8,28 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
-
-    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
-
-      NSUserDefaults.standardUserDefaults().setBoo">
+  <meta name="description" content="1.判断App是否第一次打开1234567891011//App第一次启动调用方法 :didFinishLaunchingWithOptions:   if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) &amp;#123;        NSUserDefaults.standardUserDefaults().se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本">
 <meta property="og:url" content="http://yoursite.com/2016/11/30/Swift-从零开始-10-判断App是否第一次打开及判断是否是新版本/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
-
-    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
-
-      NSUserDefaults.standardUserDefaults().setBoo">
+<meta property="og:description" content="1.判断App是否第一次打开1234567891011//App第一次启动调用方法 :didFinishLaunchingWithOptions:   if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) &amp;#123;        NSUserDefaults.standardUserDefaults().se">
 <meta property="og:updated_time" content="2016-11-30T01:50:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 10_判断App是否第一次打开及判断是否是新版本">
-<meta name="twitter:description" content="1.判断App是否第一次打开 //App第一次启动调用方法 :didFinishLaunchingWithOptions:
-
-    if (!NSUserDefaults.standardUserDefaults().boolForKey(&amp;quot;firstLaunch&amp;quot;)) {
-
-      NSUserDefaults.standardUserDefaults().setBoo">
+<meta name="twitter:description" content="1.判断App是否第一次打开1234567891011//App第一次启动调用方法 :didFinishLaunchingWithOptions:   if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) &amp;#123;        NSUserDefaults.standardUserDefaults().se">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -166,55 +154,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-判断App是否第一次打开"><a href="#1-判断App是否第一次打开" class="headerlink" title="1.判断App是否第一次打开"></a>1.判断App是否第一次打开</h2><pre><code> //App第一次启动调用方法 :didFinishLaunchingWithOptions:
-
-    if (!NSUserDefaults.standardUserDefaults().boolForKey(&quot;firstLaunch&quot;)) {
-
-      NSUserDefaults.standardUserDefaults().setBool(true, forKey: &quot;firstLaunch&quot;)
-      print(&quot;App第一次打开&quot;)
-
-      }else{
-
-      print(&quot;App不是第一次打开&quot;)
-    }
-</code></pre><h2 id="2-判断App版本是否是新版本-OC"><a href="#2-判断App版本是否是新版本-OC" class="headerlink" title="2.判断App版本是否是新版本(OC)"></a>2.判断App版本是否是新版本(OC)</h2><pre><code>#pragma mark - 判断是不是新版本,是否需要显示新特性
-- (BOOL)isNewVision {
-    // MARK: - 目标：第一次启动这个应用时，显示新特性界面，以后就直接进入主程序！
-    // 版本号：两个版本号。Info.plist中有对应的版本号
-    // 1. 获取应用当前的版本号
-    // 获取Info.plist文件的所有信息
-    NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    // 获取当前版本号
-    NSString *currentBete = infoDict[@&quot;CFBundleShortVersionString&quot;];
-
-    // 2. 获取之前存储的版本号
-    // 获取偏好设置对象
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *oldBete = [defaults objectForKey:@&quot;app_version&quot;];
-
-    // 3. 比较新旧版本号
-    if ([currentBete isEqualToString:oldBete])
-    {
-        //如果新旧版本号相等,直接进入主程序
-        return NO;
-    }else {
-        //如果不相等
-        //获取偏好设置
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        //存储
-        [defaults setObject:currentBete forKey:@&quot;app_version&quot;];
-        //立即同步
-        [defaults synchronize];
-        return YES;
-    }
-
-    didFinishLaunchingWithOptions:
-    //设置根控制器(DXGuideController:新特性)
-    if ([self isNewVision]) {
-        self.window.rootViewController = [[DXGuideController alloc] init];
-    }else {
-         self.window.rootViewController = tabBarVC;
-</code></pre>
+        <h2 id="1-判断App是否第一次打开"><a href="#1-判断App是否第一次打开" class="headerlink" title="1.判断App是否第一次打开"></a>1.判断App是否第一次打开</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//App第一次启动调用方法 :didFinishLaunchingWithOptions:</span></div><div class="line"></div><div class="line">   <span class="selector-tag">if</span> (!NSUserDefaults.standardUserDefaults().boolForKey(<span class="string">"firstLaunch"</span>)) &#123;</div><div class="line">   </div><div class="line">     <span class="selector-tag">NSUserDefaults</span><span class="selector-class">.standardUserDefaults</span>()<span class="selector-class">.setBool</span>(true, <span class="attribute">forKey</span>: <span class="string">"firstLaunch"</span>)</div><div class="line">     <span class="selector-tag">print</span>(<span class="string">"App第一次打开"</span>)</div><div class="line">     </div><div class="line">     &#125;<span class="selector-tag">else</span>&#123;</div><div class="line">     </div><div class="line">     <span class="selector-tag">print</span>(<span class="string">"App不是第一次打开"</span>)</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="2-判断App版本是否是新版本-OC"><a href="#2-判断App版本是否是新版本-OC" class="headerlink" title="2.判断App版本是否是新版本(OC)"></a>2.判断App版本是否是新版本(OC)</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark - 判断是不是新版本,是否需要显示新特性</span></div><div class="line">- (<span class="built_in">BOOL</span>)isNewVision &#123;</div><div class="line">    <span class="comment">// MARK: - 目标：第一次启动这个应用时，显示新特性界面，以后就直接进入主程序！</span></div><div class="line">    <span class="comment">// 版本号：两个版本号。Info.plist中有对应的版本号</span></div><div class="line">    <span class="comment">// 1. 获取应用当前的版本号</span></div><div class="line">    <span class="comment">// 获取Info.plist文件的所有信息</span></div><div class="line">    <span class="built_in">NSDictionary</span> *infoDict = [<span class="built_in">NSBundle</span> mainBundle].infoDictionary;</div><div class="line">    <span class="comment">// 获取当前版本号</span></div><div class="line">    <span class="built_in">NSString</span> *currentBete = infoDict[<span class="string">@"CFBundleShortVersionString"</span>];</div><div class="line">    </div><div class="line">    <span class="comment">// 2. 获取之前存储的版本号</span></div><div class="line">    <span class="comment">// 获取偏好设置对象</span></div><div class="line">    <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</div><div class="line">    <span class="built_in">NSString</span> *oldBete = [defaults objectForKey:<span class="string">@"app_version"</span>];</div><div class="line">    </div><div class="line">    <span class="comment">// 3. 比较新旧版本号</span></div><div class="line">    <span class="keyword">if</span> ([currentBete isEqualToString:oldBete])</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//如果新旧版本号相等,直接进入主程序</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//如果不相等</span></div><div class="line">        <span class="comment">//获取偏好设置</span></div><div class="line">        <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</div><div class="line">        <span class="comment">//存储</span></div><div class="line">        [defaults setObject:currentBete forKey:<span class="string">@"app_version"</span>];</div><div class="line">        <span class="comment">//立即同步</span></div><div class="line">        [defaults synchronize];</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    didFinishLaunchingWithOptions:</div><div class="line">    <span class="comment">//设置根控制器(DXGuideController:新特性)</span></div><div class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> isNewVision]) &#123;</div><div class="line">        <span class="keyword">self</span>.window.rootViewController = [[DXGuideController alloc] init];</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">         <span class="keyword">self</span>.window.rootViewController = tabBarVC;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">

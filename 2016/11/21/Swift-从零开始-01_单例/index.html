@@ -8,34 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Swift 从零开始 01_单例 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Swift单例的写法需要对单例的属性做修改    static let shareInstance: HTTPClient = {
-
-        let afn = HTTPClient()
-
-        // 设置网络请求的 content-type: text/plain
-
-        afn.responseSerializer.acceptableContentTypes?.i">
+  <meta name="description" content="Swift单例的写法需要对单例的属性做修改12345678910static let shareInstance: HTTPClient = &amp;#123;    let afn = HTTPClient()        // 设置网络请求的 content-type: text/plain        afn.responseSerializer.acceptableContentTypes?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 01_单例">
 <meta property="og:url" content="http://yoursite.com/2016/11/21/Swift-从零开始-01_单例/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="Swift单例的写法需要对单例的属性做修改    static let shareInstance: HTTPClient = {
-
-        let afn = HTTPClient()
-
-        // 设置网络请求的 content-type: text/plain
-
-        afn.responseSerializer.acceptableContentTypes?.i">
+<meta property="og:description" content="Swift单例的写法需要对单例的属性做修改12345678910static let shareInstance: HTTPClient = &amp;#123;    let afn = HTTPClient()        // 设置网络请求的 content-type: text/plain        afn.responseSerializer.acceptableContentTypes?">
 <meta property="og:updated_time" content="2016-11-21T08:17:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 01_单例">
-<meta name="twitter:description" content="Swift单例的写法需要对单例的属性做修改    static let shareInstance: HTTPClient = {
-
-        let afn = HTTPClient()
-
-        // 设置网络请求的 content-type: text/plain
-
-        afn.responseSerializer.acceptableContentTypes?.i">
+<meta name="twitter:description" content="Swift单例的写法需要对单例的属性做修改12345678910static let shareInstance: HTTPClient = &amp;#123;    let afn = HTTPClient()        // 设置网络请求的 content-type: text/plain        afn.responseSerializer.acceptableContentTypes?">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -172,18 +154,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Swift单例的写法"><a href="#Swift单例的写法" class="headerlink" title="Swift单例的写法"></a>Swift单例的写法</h1><h2 id="需要对单例的属性做修改"><a href="#需要对单例的属性做修改" class="headerlink" title="需要对单例的属性做修改"></a>需要对单例的属性做修改</h2><pre><code>    static let shareInstance: HTTPClient = {
-
-        let afn = HTTPClient()
-
-        // 设置网络请求的 content-type: text/plain
-
-        afn.responseSerializer.acceptableContentTypes?.insert(&quot;text/plain&quot;)
-
-        return afn
-    }()
-</code></pre><h2 id="不需要对单例的属性做修改"><a href="#不需要对单例的属性做修改" class="headerlink" title="不需要对单例的属性做修改"></a>不需要对单例的属性做修改</h2><pre><code>static let sharedInstance = TCPManager()
-</code></pre>
+        <h1 id="Swift单例的写法"><a href="#Swift单例的写法" class="headerlink" title="Swift单例的写法"></a>Swift单例的写法</h1><h2 id="需要对单例的属性做修改"><a href="#需要对单例的属性做修改" class="headerlink" title="需要对单例的属性做修改"></a>需要对单例的属性做修改</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">let</span> shareInstance: HTTPClient = &#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> afn = HTTPClient()</div><div class="line">    </div><div class="line">    <span class="comment">// 设置网络请求的 content-type: text/plain</span></div><div class="line">    </div><div class="line">    afn.responseSerializer.acceptableContentTypes?.insert(<span class="string">"text/plain"</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> afn</div><div class="line">&#125;()</div></pre></td></tr></table></figure>
+<h2 id="不需要对单例的属性做修改"><a href="#不需要对单例的属性做修改" class="headerlink" title="不需要对单例的属性做修改"></a>不需要对单例的属性做修改</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = TCPManager()</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">

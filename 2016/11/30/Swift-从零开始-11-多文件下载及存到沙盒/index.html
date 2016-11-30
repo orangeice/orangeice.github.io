@@ -12,11 +12,7 @@
 
 先看代码
 
-func downloadGameAudioWithUrl(urlStr: String) {
-
-    // 1. URL
-    let url = NSURL(string: urlStr)
-    let request = NSURLRequest(UR">
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950func downloadGameAudioWithUrl(urlStr: Str">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 从零开始 11_多文件下载及存到沙盒">
 <meta property="og:url" content="http://yoursite.com/2016/11/30/Swift-从零开始-11-多文件下载及存到沙盒/index.html">
@@ -25,11 +21,7 @@ func downloadGameAudioWithUrl(urlStr: String) {
 
 先看代码
 
-func downloadGameAudioWithUrl(urlStr: String) {
-
-    // 1. URL
-    let url = NSURL(string: urlStr)
-    let request = NSURLRequest(UR">
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950func downloadGameAudioWithUrl(urlStr: Str">
 <meta property="og:updated_time" content="2016-11-30T02:32:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 从零开始 11_多文件下载及存到沙盒">
@@ -37,11 +29,7 @@ func downloadGameAudioWithUrl(urlStr: String) {
 
 先看代码
 
-func downloadGameAudioWithUrl(urlStr: String) {
-
-    // 1. URL
-    let url = NSURL(string: urlStr)
-    let request = NSURLRequest(UR">
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950func downloadGameAudioWithUrl(urlStr: Str">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -182,57 +170,8 @@ func downloadGameAudioWithUrl(urlStr: String) {
 
 <font color="LightSalmon" size="3">先看代码</font>
 
-<pre><code>func downloadGameAudioWithUrl(urlStr: String) {
-
-    // 1. URL
-    let url = NSURL(string: urlStr)
-    let request = NSURLRequest(URL: url!)
-
-    // 2. 自定义session,需要设置代理
-    // 选择默认配置信息
-    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-    let downloadSession = NSURLSession(configuration:
-      config, delegate: self, delegateQueue: nil)
-
-     // 3. 发起下载任务(在这里回调里面,就可以对下载好的文件进行处理)
-    let downloadTask = downloadSession.downloadTaskWithRequest(request) { (location, response, error) in
-
-     // 下载的位置,沙盒中tmp目录中的临时文件,会被及时删除
-      print(&quot;文件下载路径: \(location.path)&quot;)
-
-     /*
-      document       备份,下载的文件不能放在此文件夹中 
-      cache          缓存的,不备份,重新启动不会被清空,如果缓存内容过多,可以考虑新建一条线程检查缓存目录中的文件大小,自动清理缓存,给用户节省控件 
-      tmp            临时,不备份,不缓存,重新启动iPhone,会自动清空 
-     */  
-
-      //要把下载下来的文件,从tmp文件夹拷贝到cache文件夹下
-      //获取cachew文件路径
-      let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).lastEle
-
-      //获取下载文件的名字保存以便下面的路径拼接
-      self.downloadFileName = (url?.lastPathComponent)!
-
-      // 拼接文件路径
-      let filePath = path.stringByAppendingString(&quot;/&quot; + self.downloadFileName)
-      print(&quot;文件保存路径: \(filePath)&quot;)
-
-      //创建文件管理器
-      //这里,copyItemAtPath方法需要做异常处理
-      let fileManager = NSFileManager.defaultManager()
-      do {
-        try fileManager.copyItemAtPath(location!.path!, toPath: filePath)
-      } catch let error as NSError {
-        // 发生了错误
-        print(error.localizedDescription)
-      }
-    }
-
-    // 4. 启动下载任务
-    downloadTask.resume()
-    }
-}
-</code></pre><font color="LightCoral" size="4">后记:<br>这里只提到了我项目中用到的方法,很有很多方法很多思路可以实现,欢迎大家来讨论!</font>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">downloadGameAudioWithUrl</span><span class="params">(urlStr: String)</span></span> &#123;</div><div class="line"></div><div class="line">	<span class="comment">// 1. URL</span></div><div class="line">    <span class="keyword">let</span> url = <span class="type">NSURL</span>(string: urlStr)</div><div class="line">    <span class="keyword">let</span> request = <span class="type">NSURLRequest</span>(<span class="type">URL</span>: url!)</div><div class="line">    </div><div class="line">    <span class="comment">// 2. 自定义session,需要设置代理</span></div><div class="line">    <span class="comment">// 选择默认配置信息</span></div><div class="line">    <span class="keyword">let</span> config = <span class="type">NSURLSessionConfiguration</span>.defaultSessionConfiguration()</div><div class="line">    <span class="keyword">let</span> downloadSession = <span class="type">NSURLSession</span>(configuration:</div><div class="line">      config, delegate: <span class="keyword">self</span>, delegateQueue: <span class="literal">nil</span>)</div><div class="line">    </div><div class="line">     <span class="comment">// 3. 发起下载任务(在这里回调里面,就可以对下载好的文件进行处理)</span></div><div class="line">    <span class="keyword">let</span> downloadTask = downloadSession.downloadTaskWithRequest(request) &#123; (location, response, error) <span class="keyword">in</span></div><div class="line">    </div><div class="line">     <span class="comment">// 下载的位置,沙盒中tmp目录中的临时文件,会被及时删除</span></div><div class="line">      <span class="built_in">print</span>(<span class="string">"文件下载路径: <span class="subst">\(location.path)</span>"</span>)</div><div class="line">    </div><div class="line">     <span class="comment">/*</span></div><div class="line">      document       备份,下载的文件不能放在此文件夹中 </div><div class="line">      cache          缓存的,不备份,重新启动不会被清空,如果缓存内容过多,可以考虑新建一条线程检查缓存目录中的文件大小,自动清理缓存,给用户节省控件 </div><div class="line">      tmp            临时,不备份,不缓存,重新启动iPhone,会自动清空 </div><div class="line">     */  </div><div class="line"> </div><div class="line">      <span class="comment">//要把下载下来的文件,从tmp文件夹拷贝到cache文件夹下</span></div><div class="line">      <span class="comment">//获取cachew文件路径</span></div><div class="line">      <span class="keyword">let</span> path = <span class="type">NSSearchPathForDirectoriesInDomains</span>(.<span class="type">CachesDirectory</span>, .<span class="type">UserDomainMask</span>, <span class="literal">true</span>).lastEle</div><div class="line">      </div><div class="line">      <span class="comment">//获取下载文件的名字保存以便下面的路径拼接</span></div><div class="line">      <span class="keyword">self</span>.downloadFileName = (url?.lastPathComponent)!</div><div class="line">      </div><div class="line">      <span class="comment">// 拼接文件路径</span></div><div class="line">      <span class="keyword">let</span> filePath = path.stringByAppendingString(<span class="string">"/"</span> + <span class="keyword">self</span>.downloadFileName)</div><div class="line">      <span class="built_in">print</span>(<span class="string">"文件保存路径: <span class="subst">\(filePath)</span>"</span>)</div><div class="line"></div><div class="line">      <span class="comment">//创建文件管理器</span></div><div class="line">      <span class="comment">//这里,copyItemAtPath方法需要做异常处理</span></div><div class="line">      <span class="keyword">let</span> fileManager = <span class="type">NSFileManager</span>.defaultManager()</div><div class="line">      <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileManager.copyItemAtPath(location!.path!, toPath: filePath)</div><div class="line">      &#125; <span class="keyword">catch</span> <span class="keyword">let</span> error <span class="keyword">as</span> <span class="type">NSError</span> &#123;</div><div class="line">        <span class="comment">// 发生了错误</span></div><div class="line">        <span class="built_in">print</span>(error.localizedDescription)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 4. 启动下载任务</span></div><div class="line">    downloadTask.resume()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font color="LightCoral" size="4">后记:<br>这里只提到了我项目中用到的方法,很有很多方法很多思路可以实现,欢迎大家来讨论!</font>
       
     </div>
     <div class="article-info article-info-index">
