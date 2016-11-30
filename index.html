@@ -137,6 +137,72 @@
       <div class="body-wrap">
         
   
+    <article id="post-Swift-从零开始-12-Swift和H5的交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/30/Swift-从零开始-12-Swift和H5的交互/">Swift 从零开始 12_Swift和H5的交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font color="OrangeRed" size="4">本文主要讲述项目中用到的一套交互机制,方法很多,欢迎交流</font>
+
+<h3 id="首先-用的WkWebView"><a href="#首先-用的WkWebView" class="headerlink" title="首先,用的WkWebView"></a>首先,用的WkWebView</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">CBWebView</span>: <span class="title">WKScriptMessageHandler</span> </span>&#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">userContentController</span><span class="params">(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage)</span></span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> _handleViewController = handleViewController <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//接受h5那边发过来的消息,消息存放在message的body中</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> cmd = <span class="type">Cmd</span>.create(with: message.body <span class="keyword">as</span>! <span class="type">String</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">    </div><div class="line">    <span class="type">CMDManager</span>.sharedInstance.performCmd(_handleViewController, cmd: cmd)</div><div class="line">    </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="cmd是自定义的存放消息的类"><a href="#cmd是自定义的存放消息的类" class="headerlink" title="cmd是自定义的存放消息的类"></a>cmd是自定义的存放消息的类</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class <span class="keyword">Cmd</span><span class="bash"> &#123;</span></div><div class="line">  class func create(with text: String) -&gt; <span class="keyword">Cmd</span><span class="bash">? &#123;</span></div><div class="line">  </div><div class="line">    if let json = JSON.createFromString(text) &#123;</div><div class="line">      </div><div class="line">      let <span class="keyword">cmd</span><span class="bash"> = Cmd()</span></div><div class="line">      <span class="keyword">cmd</span>.<span class="bash">action = json[<span class="string">"cmd"</span>].stringValue</span></div><div class="line">      <span class="keyword">cmd</span>.<span class="bash">params = json[<span class="string">"data"</span>]</span></div><div class="line">      </div><div class="line">      return <span class="keyword">cmd</span><span class="bash"></span></div><div class="line">    &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="CMDManager是oc方法的管理类"><a href="#CMDManager是oc方法的管理类" class="headerlink" title="CMDManager是oc方法的管理类"></a>CMDManager是oc方法的管理类</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMDManager</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> currentCmdAction: <span class="type">String</span>!</div><div class="line">  <span class="keyword">var</span> currentCmdParams: <span class="type">JSON</span>!</div><div class="line">  <span class="keyword">weak</span> <span class="keyword">var</span> currentViewController: <span class="type">UIViewController</span>!</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">performCmd</span><span class="params">(handleViewController: UIViewController, cmd: Cmd)</span></span> &#123;</div><div class="line">    </div><div class="line">    currentCmdAction = cmd.action</div><div class="line">    currentViewController = handleViewController</div><div class="line">    currentCmdParams = cmd.params</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> respondsToSelector(<span class="type">Selector</span>(currentCmdAction)) &#123;</div><div class="line">      </div><div class="line">      performSelector(<span class="type">Selector</span>(currentCmdAction))</div><div class="line">      <span class="type">DDLogVerbose</span>(<span class="string">"cmd: <span class="subst">\(cmd.action)</span>, params: <span class="subst">\(<span class="keyword">self</span>.currentCmdParams.rawString()</span> ?? "</span><span class="string">")"</span>)</div><div class="line">      </div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      </div><div class="line">      <span class="type">DDLogWarn</span>(<span class="string">"<span class="subst">\(cmd.action)</span> has not be implement"</span>)</div><div class="line">      </div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="4">通过上面三段代码就可以知道:<br>h5发送消息到WKScriptMessageHandler的Message中,然后将消息体(message.body存到到cmd中,对应的action和params).然后再调用CMDManager的performCmd方法,将cmd传过来,然后通过respondsToSelector 方法判断该类中是否实现了对面方法(cmd.action),实现了就可以调用,没有实现则提示.</font>
+
+<h3 id="比如h5加载时-调用oc的hide-loading方法"><a href="#比如h5加载时-调用oc的hide-loading方法" class="headerlink" title="比如h5加载时,调用oc的hide_loading方法"></a>比如h5加载时,调用oc的hide_loading方法</h3><h4 id="通过h5的文档-知道方法名及参数-然后自己把方法实现即可"><a href="#通过h5的文档-知道方法名及参数-然后自己把方法实现即可" class="headerlink" title="通过h5的文档,知道方法名及参数,然后自己把方法实现即可."></a>通过h5的文档,知道方法名及参数,然后自己把方法实现即可.</h4><font color="OrangeRed" size="4">这里是h5调用oc的方法,并且没有回调</font>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//隐藏加载页面</span></div><div class="line">  <span class="function"><span class="keyword">func</span> <span class="title">hide_loading</span> <span class="params">()</span></span> &#123;</div><div class="line">    <span class="comment">//调用CBWebView 的 hideLoadView()方法</span></div><div class="line">    (currentViewController <span class="keyword">as</span>? <span class="type">FruitViewController</span> )?.webView.hideLoadView()</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="4">下面说说h5调用oc方法之后,还要回调h5方法的例子</font>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取app的数据</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">get_app_data</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="comment">//callbackName和callbackID是参数,通过cmd.params传过来的</span></div><div class="line">    <span class="keyword">let</span> callbackName = <span class="keyword">self</span>.currentCmdParams[<span class="string">"callbackName"</span>].stringValue</div><div class="line">    <span class="keyword">let</span> callbackID = <span class="keyword">self</span>.currentCmdParams[<span class="string">"callbackID"</span>].intValue</div><div class="line">    <span class="keyword">let</span> loginInfo : <span class="type">LoginInfo</span></div><div class="line">    loginInfo = <span class="type">InfoManager</span>.sharedInstance.readLoginInfo()!</div><div class="line">    </div><div class="line">    <span class="comment">//回调h5方法</span></div><div class="line">    (<span class="keyword">self</span>.currentViewController <span class="keyword">as</span>? <span class="type">FruitViewController</span>)?.webView.getAppData(callbackName, callbackID: callbackID, loginInfo: loginInfo)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>然后在CBWebView的Extension(新建一个类叫 WebViewExtension)中实现oc调用js的代码</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这是WkWebView种调用js方法的方法</span></div><div class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">perfromJs</span><span class="params">(method:String,param1:String,param2:String, completionHandler: <span class="params">(<span class="params">(Any?, NSError?)</span></span></span></span> -&gt; <span class="type">Void</span>)?) </div><div class="line">  &#123;</div><div class="line">    <span class="keyword">self</span>.evaluateJavaScript(<span class="string">"<span class="subst">\(method)</span>('<span class="subst">\(param1)</span>','<span class="subst">\(param2)</span>')"</span>, completionHandler: completionHandler)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回调方法</span></div><div class="line"><span class="comment">//回调参数(callbackID,&#123;uid:”10000”,”auth”:” asdasdasd213”&#125;)</span></div><div class="line"> <span class="function"><span class="keyword">func</span> <span class="title">getAppData</span><span class="params">(callbackName: String, callbackID: Int,loginInfo: LoginInfo)</span></span> &#123;</div><div class="line">   <span class="keyword">var</span> str1 = <span class="string">""</span></div><div class="line">   <span class="keyword">var</span> str2 = <span class="string">""</span></div><div class="line">   </div><div class="line">   str1 = <span class="string">"<span class="subst">\(callbackID)</span>"</span></div><div class="line">   str2 = <span class="string">"&#123;\"uid\":\"<span class="subst">\(loginInfo.uid)</span>\",\"auth\":\"<span class="subst">\(loginInfo.auth)</span>\"&#125;"</span></div><div class="line">   </div><div class="line">   <span class="built_in">print</span>(<span class="string">"str------<span class="subst">\(str1 + str2)</span>"</span>)</div><div class="line">   perfromJs(callbackName, param1:str1, param2:str2) &#123; (obj, err) <span class="keyword">in</span></div><div class="line">     <span class="built_in">print</span>(err)</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="4">至此,swift中和h5的互调完成,整个逻辑其实很简单,主意和h5开发人员沟通好就行!</font>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/30/Swift-从零开始-12-Swift和H5的交互/" class="archive-article-date">
+  	<time datetime="2016-11-30T03:02:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift-h5交互/">swift h5交互</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-IOS开发实用小技巧-持续更新" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -728,67 +794,6 @@
 
 
   
-    <article id="post-Swift-从零开始-03_类型别名及Bool值" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/">Swift 从零开始 03_类型别名及Bool值</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h1><p>类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
-<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typealias</span> AudioSample = <span class="built_in">UInt16</span></div></pre></td></tr></table></figure>
-<p>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">var</span> maxAmplitudeFound = AudioSample<span class="selector-class">.min</span></div><div class="line"><span class="comment">// maxAmplitudeFound 现在是 0</span></div></pre></td></tr></table></figure>
-<p>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</p>
-<h1 id="Bool值"><a href="#Bool值" class="headerlink" title="Bool值"></a>Bool值</h1><p>Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的（logical），因为它们只能是真或者假。Swift 有两个布尔常量，true和false：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="attr">orangesAreOrange</span> = <span class="literal">true</span></div><div class="line"><span class="keyword">let</span> <span class="attr">turnipsAreDelicious</span> = <span class="literal">false</span></div></pre></td></tr></table></figure>
-<p>当你编写条件语句比如if语句的时候，布尔值非常有用：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">if</span> turnipsAreDelicious &#123;</div><div class="line">    <span class="built_in">println</span>(<span class="string">"Mmm, tasty turnips!"</span>)</div><div class="line">&#125; <span class="built_in">else</span> &#123;</div><div class="line">    <span class="built_in">println</span>(<span class="string">"Eww, turnips are horrible."</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// 输出 "Eww, turnips are horrible."</span></div></pre></td></tr></table></figure>
-<p>条件语句，例如if，请参考控制流。</p>
-<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let <span class="selector-tag">i</span> = <span class="number">1</span></div><div class="line"><span class="keyword">if</span> <span class="selector-tag">i</span> &#123;</div><div class="line">    <span class="comment">// 这个例子不会通过编译，会报错</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然而，下面的例子是合法的：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let <span class="selector-tag">i</span> = <span class="number">1</span></div><div class="line"><span class="keyword">if</span> <span class="selector-tag">i</span> == <span class="number">1</span> &#123;</div><div class="line">    <span class="comment">// 这个例子会编译成功</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
-<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-03_类型别名及Bool值/" class="archive-article-date">
-  	<time datetime="2016-11-21T05:24:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -859,7 +864,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift-h5交互/" style="font-size: 10px;">swift h5交互</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
     			</div>
     	</section>
     
