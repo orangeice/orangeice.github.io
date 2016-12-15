@@ -137,6 +137,61 @@
       <div class="body-wrap">
         
   
+    <article id="post-Swift-从零开始-14-构造器的继承和重写" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/15/Swift-从零开始-14-构造器的继承和重写/">Swift 从零开始 14_构造器的继承和重写</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font color="OrangeRed" size="4">1.构造器的继承:</font>
+
+<p>Swift的子类不会自动继承父类的构造器, 若继承, 则满足如下规则:<br><br>1.如果子类没有提供任何指定构造器, 那么它将自动继承父类的所有指定构造器<br><br>2.如果子类实现了父类所有的指定构造器, 无论如何实现的, 都将自动继承父类的所有便利构造器</p>
+<font color="OrangeRed" size="4">2.构造器的重写:</font>
+
+<p>1.子类构造器重写了父类的指定构造器, 必须添加override修饰符<br><br>2.子类中定义的构造器只是和父类中便利构造器的形参列表, 外部形参名相同, 不算重写</p>
+<font color="OrangeRed" size="4">总结:</font>
+
+<p>1.如果一个子类没有定义任何构造器, 那么它将自动继承父类中的所有构造器<br><br>2.如果一个子类重写父类的所有指定构造器, 那么它将自动继承父类中的所有便利构造器<br><br>3.如果一个子类中任意的构造器和父类的便利构造器一模一样, 不算重写, 创建对象的时候也只会显示子类定义的构造器</p>
+<font color="OrangeRed" size="4">示例代码</font>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span>!</div><div class="line">    <span class="keyword">var</span> weight: <span class="type">Double</span></div><div class="line">     </div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = <span class="number">0.0</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义指定构造器</span></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>, weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = weight</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义便利构造器(使用convenience修饰)</span></div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(n name: <span class="type">String</span>, w weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="comment">// 便利构造器必须调用同类中的指定构造器</span></div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: name, weight: weight)</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(showStr: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">""</span>, weight: <span class="number">0.0</span>)</div><div class="line">        <span class="built_in">print</span>(showStr)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span>: <span class="title">Person</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">var</span> sex: <span class="type">String</span> = <span class="string">"男"</span></div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="comment">// 子类的指定构造器中必须调用父类的指定构造器</span></div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = <span class="number">0.0</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>, weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name, weight: weight)</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = weight</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义指定构造器与父类的便利构造器一样, 这里不算重写</span></div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(showStr: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">""</span>, weight: <span class="number">0.0</span>)</div><div class="line">        <span class="built_in">print</span>(showStr)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> man = <span class="type">Man</span>(name: <span class="string">"Rinpe"</span>, weight: <span class="number">62.0</span>)</div><div class="line"><span class="keyword">var</span> man1 = <span class="type">Man</span>(showStr: <span class="string">"HelloWorld"</span>)</div></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/15/Swift-从零开始-14-构造器的继承和重写/" class="archive-article-date">
+  	<time datetime="2016-12-15T07:05:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-15</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Swift-从零开始-13-自定义init方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -691,61 +746,6 @@
       
       <a href="/2016/11/21/Swift-从零开始-06_断言/" class="archive-article-date">
   	<time datetime="2016-11-21T06:28:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift-从零开始-05_if let 与 guard" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-05_if let 与 guard/">Swift 从零开始 05_if let 与 guard</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift控制流-如何理解-if-let-与guard"><a href="#Swift控制流-如何理解-if-let-与guard" class="headerlink" title="Swift控制流: 如何理解 if let 与guard?"></a>Swift控制流: 如何理解 if let 与guard?</h1><p>if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。</p>
-<h3 id="if-let"><a href="#if-let" class="headerlink" title="if let"></a>if let</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">let</span> v: <span class="type">String</span>! = str</div><div class="line">    <span class="keyword">if</span> v != <span class="literal">nil</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// use v to do something</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Swift 中因为有optional, 经常需要判断是否为空。假如没有if let，大致写成上面的样子，有了 if let, 可以改写成:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> v = str</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// use v to do something</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面两段代码的控制流是一样的。对照着，可以看出if let的写法更加简洁方便。</p>
-<hr>
-<h3 id="guard"><a href="#guard" class="headerlink" title="guard"></a>guard</h3><p>假如 if 中出现的代码很长，我们写代码时可以将错误情况先返回。比如：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">let</span> v: <span class="type">String</span>! = str</div><div class="line">    <span class="keyword">if</span> v == <span class="literal">nil</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// use v to do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样做可以避免过多的嵌套。上面代码实在太常见了，swift也提供一个guard这个语法糖，用guard可以改写成：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> v = str <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"></div><div class="line">    <span class="comment">// use v to do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面两段代码的控制流是一样的。也可以看出guard的写法更加简洁方便。</p>
-<h5 id="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"><a href="#if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强" class="headerlink" title="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"></a><font color="red">if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强</font></h5>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:16:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
 </a>
       
       

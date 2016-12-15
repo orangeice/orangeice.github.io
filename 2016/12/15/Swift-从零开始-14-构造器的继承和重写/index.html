@@ -6,18 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Swift 从零开始 13_自定义init方法 | Chen bin</title>
+  <title>Swift 从零开始 14_构造器的继承和重写 | Chen bin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
+  <meta name="description" content="1.构造器的继承:
+
+Swift的子类不会自动继承父类的构造器, 若继承, 则满足如下规则:1.如果子类没有提供任何指定构造器, 那么它将自动继承父类的所有指定构造器2.如果子类实现了父类所有的指定构造器, 无论如何实现的, 都将自动继承父类的所有便利构造器
+2.构造器的重写:
+
+1.子类构造器重写了父类的指定构造器, 必须添加override修饰符2.子类中定义的构造器只是和父类中便利构造器的形">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 从零开始 13_自定义init方法">
-<meta property="og:url" content="http://yoursite.com/2016/12/15/Swift-从零开始-13-自定义init方法/index.html">
+<meta property="og:title" content="Swift 从零开始 14_构造器的继承和重写">
+<meta property="og:url" content="http://yoursite.com/2016/12/15/Swift-从零开始-14-构造器的继承和重写/index.html">
 <meta property="og:site_name" content="Chen bin">
-<meta property="og:description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
-<meta property="og:updated_time" content="2016-12-15T07:02:06.000Z">
+<meta property="og:description" content="1.构造器的继承:
+
+Swift的子类不会自动继承父类的构造器, 若继承, 则满足如下规则:1.如果子类没有提供任何指定构造器, 那么它将自动继承父类的所有指定构造器2.如果子类实现了父类所有的指定构造器, 无论如何实现的, 都将自动继承父类的所有便利构造器
+2.构造器的重写:
+
+1.子类构造器重写了父类的指定构造器, 必须添加override修饰符2.子类中定义的构造器只是和父类中便利构造器的形">
+<meta property="og:updated_time" content="2016-12-15T07:11:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 从零开始 13_自定义init方法">
-<meta name="twitter:description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
+<meta name="twitter:title" content="Swift 从零开始 14_构造器的继承和重写">
+<meta name="twitter:description" content="1.构造器的继承:
+
+Swift的子类不会自动继承父类的构造器, 若继承, 则满足如下规则:1.如果子类没有提供任何指定构造器, 那么它将自动继承父类的所有指定构造器2.如果子类实现了父类所有的指定构造器, 无论如何实现的, 都将自动继承父类的所有便利构造器
+2.构造器的重写:
+
+1.子类构造器重写了父类的指定构造器, 必须添加override修饰符2.子类中定义的构造器只是和父类中便利构造器的形">
   
     <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
   
@@ -136,7 +151,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Swift-从零开始-13-自定义init方法" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Swift-从零开始-14-构造器的继承和重写" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,7 +161,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Swift 从零开始 13_自定义init方法
+      Swift 从零开始 14_构造器的继承和重写
     </h1>
   
 
@@ -154,22 +169,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="自定义init初始化构造函数实现参数传递"><a href="#自定义init初始化构造函数实现参数传递" class="headerlink" title="自定义init初始化构造函数实现参数传递"></a>自定义init初始化构造函数实现参数传递</h2><h4 id="对于UIKit框架类，不能像下面一样简单的重写："><a href="#对于UIKit框架类，不能像下面一样简单的重写：" class="headerlink" title="对于UIKit框架类，不能像下面一样简单的重写："></a>对于UIKit框架类，不能像下面一样简单的重写：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> imageUrl: <span class="type">String</span>!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(imageUrl: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.imageUrl = imageUrl</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</div><div class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">        <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.whiteColor()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<font color="OrangeRed" size="4">这样编译器会报如下错误：</font>
+        <font color="OrangeRed" size="4">1.构造器的继承:</font>
 
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Super.init isn‘t called <span class="keyword">before</span> <span class="keyword">returning</span> <span class="keyword">from</span> initializer</div></pre></td></tr></table></figure>
-<font color="OrangeRed" size="3">原因分析：</font>
+<p>Swift的子类不会自动继承父类的构造器, 若继承, 则满足如下规则:<br><br>1.如果子类没有提供任何指定构造器, 那么它将自动继承父类的所有指定构造器<br><br>2.如果子类实现了父类所有的指定构造器, 无论如何实现的, 都将自动继承父类的所有便利构造器</p>
+<font color="OrangeRed" size="4">2.构造器的重写:</font>
 
-<p>1.在 Swift 中, 类的初始化器有两种, 分别是Designated Initializer（指定初始化器）和Convenience Initializer（便利初始化器）<br><br>2.如果子类没有定义任何的指定初始化器, 那么会默认继承所有来自父类的指定初始化器。<br><br>3.如果子类提供了所有父类指定初始化器的实现, 那么自动继承父类的便利初始化器<br><br>4.如果子类只实现部分父类初始化器，那么父类其他的指定初始化器和便利初始化器都不会继承。<br><br>5.子类的指定初始化器必须要调用父类合适的指定初始化器。</p>
-<font color="OrangeRed" size="3">错误分析：</font><br>指定构造器必须调用它最近父类的指定构造器。<br><br><font color="OrangeRed" size="4">正确写法：</font>
+<p>1.子类构造器重写了父类的指定构造器, 必须添加override修饰符<br><br>2.子类中定义的构造器只是和父类中便利构造器的形参列表, 外部形参名相同, 不算重写</p>
+<font color="OrangeRed" size="4">总结:</font>
 
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> imageUrl: <span class="type">String</span>!</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(imageUrl: <span class="type">String</span>) &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: <span class="literal">nil</span>, bundle: <span class="literal">nil</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">self</span>.imageUrl = imageUrl</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</div><div class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.whiteColor()</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>1.如果一个子类没有定义任何构造器, 那么它将自动继承父类中的所有构造器<br><br>2.如果一个子类重写父类的所有指定构造器, 那么它将自动继承父类中的所有便利构造器<br><br>3.如果一个子类中任意的构造器和父类的便利构造器一模一样, 不算重写, 创建对象的时候也只会显示子类定义的构造器</p>
+<font color="OrangeRed" size="4">示例代码</font>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span>!</div><div class="line">    <span class="keyword">var</span> weight: <span class="type">Double</span></div><div class="line">     </div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = <span class="number">0.0</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义指定构造器</span></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>, weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = weight</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义便利构造器(使用convenience修饰)</span></div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(n name: <span class="type">String</span>, w weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="comment">// 便利构造器必须调用同类中的指定构造器</span></div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: name, weight: weight)</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(showStr: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">""</span>, weight: <span class="number">0.0</span>)</div><div class="line">        <span class="built_in">print</span>(showStr)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span>: <span class="title">Person</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">var</span> sex: <span class="type">String</span> = <span class="string">"男"</span></div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="comment">// 子类的指定构造器中必须调用父类的指定构造器</span></div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = <span class="number">0.0</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(name: <span class="type">String</span>, weight: <span class="type">Double</span>) &#123;</div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name, weight: weight)</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="keyword">self</span>.weight = weight</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">// 定义指定构造器与父类的便利构造器一样, 这里不算重写</span></div><div class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(showStr: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(name: <span class="string">""</span>, weight: <span class="number">0.0</span>)</div><div class="line">        <span class="built_in">print</span>(showStr)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> man = <span class="type">Man</span>(name: <span class="string">"Rinpe"</span>, weight: <span class="number">62.0</span>)</div><div class="line"><span class="keyword">var</span> man1 = <span class="type">Man</span>(showStr: <span class="string">"HelloWorld"</span>)</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/12/15/Swift-从零开始-13-自定义init方法/" class="archive-article-date">
-  	<time datetime="2016-12-15T06:56:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-15</time>
+      <a href="/2016/12/15/Swift-从零开始-14-构造器的继承和重写/" class="archive-article-date">
+  	<time datetime="2016-12-15T07:05:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-15</time>
 </a>
       
       
@@ -182,18 +199,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/12/15/Swift-从零开始-14-构造器的继承和重写/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Swift 从零开始 14_构造器的继承和重写
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/30/Swift-从零开始-12-Swift和H5的交互/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swift 从零开始 12_Swift和H5的交互</div>
+    <a href="/2016/12/15/Swift-从零开始-13-自定义init方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 13_自定义init方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -237,7 +245,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Swift-从零开始-13-自定义init方法" data-title="Swift 从零开始 13_自定义init方法" data-url="http://yoursite.com/2016/12/15/Swift-从零开始-13-自定义init方法/"></div>
+	<div class="ds-thread" data-thread-key="Swift-从零开始-14-构造器的继承和重写" data-title="Swift 从零开始 14_构造器的继承和重写" data-url="http://yoursite.com/2016/12/15/Swift-从零开始-14-构造器的继承和重写/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -137,6 +137,61 @@
       <div class="body-wrap">
         
   
+    <article id="post-Swift-从零开始-05_if let 与 guard" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/21/Swift-从零开始-05_if let 与 guard/">Swift 从零开始 05_if let 与 guard</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swift控制流-如何理解-if-let-与guard"><a href="#Swift控制流-如何理解-if-let-与guard" class="headerlink" title="Swift控制流: 如何理解 if let 与guard?"></a>Swift控制流: 如何理解 if let 与guard?</h1><p>if let 和 guard 只是语法糖，没有也可以，但有了可以使得代码更简洁方便。要理解 if let 和 guard，不妨设想假如没有这两者，代码会怎么写。</p>
+<h3 id="if-let"><a href="#if-let" class="headerlink" title="if let"></a>if let</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">let</span> v: <span class="type">String</span>! = str</div><div class="line">    <span class="keyword">if</span> v != <span class="literal">nil</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// use v to do something</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Swift 中因为有optional, 经常需要判断是否为空。假如没有if let，大致写成上面的样子，有了 if let, 可以改写成:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> v = str</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// use v to do something</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面两段代码的控制流是一样的。对照着，可以看出if let的写法更加简洁方便。</p>
+<hr>
+<h3 id="guard"><a href="#guard" class="headerlink" title="guard"></a>guard</h3><p>假如 if 中出现的代码很长，我们写代码时可以将错误情况先返回。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">let</span> v: <span class="type">String</span>! = str</div><div class="line">    <span class="keyword">if</span> v == <span class="literal">nil</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// use v to do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样做可以避免过多的嵌套。上面代码实在太常见了，swift也提供一个guard这个语法糖，用guard可以改写成：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(str: String?)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> v = str <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"></div><div class="line">    <span class="comment">// use v to do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面两段代码的控制流是一样的。也可以看出guard的写法更加简洁方便。</p>
+<h5 id="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"><a href="#if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强" class="headerlink" title="if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强"></a><font color="red">if满足条件需要return时就可以用guard，所有guard使用场景都可以用if来替代。为啥后来特意加了guard特性，那就是guard的可读性强</font></h5>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/21/Swift-从零开始-05_if let 与 guard/" class="archive-article-date">
+  	<time datetime="2016-11-21T06:16:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Swift-从零开始-04_可选项" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
