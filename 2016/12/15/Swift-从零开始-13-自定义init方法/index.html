@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Swift 从零开始 13_自定义init方法 | Chen bin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 从零开始 13_自定义init方法">
+<meta property="og:url" content="http://yoursite.com/2016/12/15/Swift-从零开始-13-自定义init方法/index.html">
+<meta property="og:site_name" content="Chen bin">
+<meta property="og:description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
+<meta property="og:updated_time" content="2016-12-15T07:02:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 从零开始 13_自定义init方法">
+<meta name="twitter:description" content="自定义init初始化构造函数实现参数传递对于UIKit框架类，不能像下面一样简单的重写：1234567891011121314151617import UIKitclass WebViewController: UIViewController &amp;#123;    var imageUrl: String!    init(imageUrl: String) &amp;#123;        self.">
+  
+    <link rel="alternative" href="/atom.xml" title="Chen bin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://ww1.sinaimg.cn/mw690/9c310acfjw1f9xix0ibtvj20qo0xbgp5.jpg" class="js-avatar show">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">陈彬</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/orangeice" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2620459727/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/15249997147@163.com" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">陈彬</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://ww1.sinaimg.cn/mw690/9c310acfjw1f9xix0ibtvj20qo0xbgp5.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">陈彬</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/orangeice" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2620459727/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/15249997147@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Swift-从零开始-13-自定义init方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Swift 从零开始 13_自定义init方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="自定义init初始化构造函数实现参数传递"><a href="#自定义init初始化构造函数实现参数传递" class="headerlink" title="自定义init初始化构造函数实现参数传递"></a>自定义init初始化构造函数实现参数传递</h2><h4 id="对于UIKit框架类，不能像下面一样简单的重写："><a href="#对于UIKit框架类，不能像下面一样简单的重写：" class="headerlink" title="对于UIKit框架类，不能像下面一样简单的重写："></a>对于UIKit框架类，不能像下面一样简单的重写：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> imageUrl: <span class="type">String</span>!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(imageUrl: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.imageUrl = imageUrl</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</div><div class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">        <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.whiteColor()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="4">这样编译器会报如下错误：</font>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Super.init isn‘t called <span class="keyword">before</span> <span class="keyword">returning</span> <span class="keyword">from</span> initializer</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="3">原因分析：</font>
+
+<p>1.在 Swift 中, 类的初始化器有两种, 分别是Designated Initializer（指定初始化器）和Convenience Initializer（便利初始化器）<br><br>2.如果子类没有定义任何的指定初始化器, 那么会默认继承所有来自父类的指定初始化器。<br><br>3.如果子类提供了所有父类指定初始化器的实现, 那么自动继承父类的便利初始化器<br><br>4.如果子类只实现部分父类初始化器，那么父类其他的指定初始化器和便利初始化器都不会继承。<br><br>5.子类的指定初始化器必须要调用父类合适的指定初始化器。</p>
+<font color="OrangeRed" size="3">错误分析：</font><br>指定构造器必须调用它最近父类的指定构造器。<br><br><font color="OrangeRed" size="4">正确写法：</font>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> imageUrl: <span class="type">String</span>!</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(imageUrl: <span class="type">String</span>) &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: <span class="literal">nil</span>, bundle: <span class="literal">nil</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">self</span>.imageUrl = imageUrl</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</div><div class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.whiteColor()</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/15/Swift-从零开始-13-自定义init方法/" class="archive-article-date">
+  	<time datetime="2016-12-15T06:56:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-15</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/30/Swift-从零开始-12-Swift和H5的交互/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift 从零开始 12_Swift和H5的交互</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<a class="jiathis_button_facebook"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_plus"></a>
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_tumblr"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+</div>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=2119929" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+
+<div class="share_addthis share_jia">
+  <div class="sharing addthis_toolbox share">
+  	<span class="jiathis_txt">Share to: &nbsp; </span>
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Swift-从零开始-13-自定义init方法" data-title="Swift 从零开始 13_自定义init方法" data-url="http://yoursite.com/2016/12/15/Swift-从零开始-13-自定义init方法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 陈彬
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<script src="/js/totop.js"></script>
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift-h5交互/" style="font-size: 10px;">swift h5交互</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">波澜不惊的程序猿</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
