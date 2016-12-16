@@ -137,6 +137,59 @@
       <div class="body-wrap">
         
   
+    <article id="post-Swift-从零开始-15-自定义tableViewCell及自定义cell删除按钮" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/16/Swift-从零开始-15-自定义tableViewCell及自定义cell删除按钮/">Swift 从零开始 15_自定义tableViewCell及自定义cell删除按钮</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MARK-此篇介绍的是用纯代码自定义封装cell-xib及sb后续更新"><a href="#MARK-此篇介绍的是用纯代码自定义封装cell-xib及sb后续更新" class="headerlink" title="MARK: 此篇介绍的是用纯代码自定义封装cell,xib及sb后续更新."></a>MARK: 此篇介绍的是用纯代码自定义封装cell,xib及sb后续更新.</h1><h3 id="1-创建自定义cell文件-继承UITableViewCell"><a href="#1-创建自定义cell文件-继承UITableViewCell" class="headerlink" title="1.创建自定义cell文件,继承UITableViewCell"></a>1.创建自定义cell文件,继承UITableViewCell</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RecordTableViewCell</span>: <span class="title">UITableViewCell</span> </span>&#123;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> deleteBtn: <span class="type">UIButton</span>!</div><div class="line">  </div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">awakeFromNib</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.awakeFromNib()</div><div class="line">    <span class="comment">//设置cell的分割线顶靠屏幕边缘(自定义方法)</span></div><div class="line">    setSeparatorByEdge()</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//如果子控件的frame会根据内容的变化而变化(即每个cell的子控件不是完全一样的),</span></div><div class="line">  考虑到cell会重用,这种时候就不在这里直接写死子控件的frame,</div><div class="line">  而是重写layouSubviews方法,动态的根据计算子控件的frame.</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">layoutSubviews</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.layoutSubviews()</div><div class="line">    </div><div class="line">    setUpViews()</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//重写initWithStyle:方法,在里面创建所有可能出现的子控件</span></div><div class="line">  <span class="keyword">override</span> <span class="keyword">init</span>(style: <span class="type">UITableViewCellStyle</span>, reuseIdentifier: <span class="type">String</span>?) &#123;</div><div class="line">    <span class="keyword">super</span>.<span class="keyword">init</span>(style: style, reuseIdentifier: reuseIdentifier)</div><div class="line">    <span class="keyword">if</span> !<span class="keyword">self</span>.isEqual(<span class="literal">nil</span>) &#123;</div><div class="line">     </div><div class="line">      deleteBtn = <span class="type">UIButton</span>()</div><div class="line">      <span class="keyword">self</span>.contentView.addSubview(deleteBtn)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setUpViews</span><span class="params">()</span></span> &#123;</div><div class="line">    </div><div class="line">    deleteBtn(<span class="string">"删除cell"</span>, forState: <span class="type">UIControlState</span>.<span class="type">Normal</span>)</div><div class="line">    deleteBtn.setTitleColor(<span class="type">UIColor</span>.hexStringToColor(<span class="string">"#EA5413"</span>), forState: <span class="type">UIControlState</span>.<span class="type">Normal</span>)</div><div class="line">    deleteBtn.titleLabel?.font = <span class="type">UIFont</span>.systemFontOfSize(<span class="number">12</span>)</div><div class="line">    deleteBtn.layer.borderWidth = <span class="number">1</span></div><div class="line">    deleteBtn.layer.borderColor = <span class="type">UIColor</span>.hexStringToColor(<span class="string">"ea5413"</span>).<span class="type">CGColor</span></div><div class="line">    </div><div class="line">    </div><div class="line">    deleteBtn.snp_makeConstraints(closure: &#123; (make) <span class="keyword">in</span></div><div class="line">      make.centerY.equalTo(<span class="keyword">self</span>.contentView.snp_centerY)</div><div class="line">      make.<span class="keyword">right</span>.equalTo(<span class="keyword">self</span>.contentView.snp_right).offset(-<span class="number">10</span>)</div><div class="line">      make.width.equalTo(<span class="keyword">self</span>.contentView.snp_width).multipliedBy(<span class="number">0.155</span>)</div><div class="line">      make.height.equalTo(<span class="keyword">self</span>.contentView.snp_height).multipliedBy(<span class="number">0.455</span>)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</div><div class="line">    <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">setSelected</span><span class="params">(selected: Bool, animated: Bool)</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.setSelected(selected, animated: animated)</div><div class="line">    </div><div class="line">    <span class="comment">// Configure the view for the selected state</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-在控制器中"><a href="#2-在控制器中" class="headerlink" title="2.在控制器中"></a>2.在控制器中</h3><h4 id="1-注册cell"><a href="#1-注册cell" class="headerlink" title="(1) 注册cell"></a>(1) 注册cell</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">tableView</span><span class="selector-class">.registerClass</span>(RecordTableViewCell.classForCoder(), <span class="attribute">forCellReuseIdentifier</span>: <span class="string">"cell"</span>)</div></pre></td></tr></table></figure>
+<h4 id="2-cellForRowAtIndex方法中创建自定义cell"><a href="#2-cellForRowAtIndex方法中创建自定义cell" class="headerlink" title="(2) cellForRowAtIndex方法中创建自定义cell"></a>(2) cellForRowAtIndex方法中创建自定义cell</h4><figure class="highlight roboconf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell &#123;</div><div class="line"></div><div class="line">    <span class="attribute">let cell</span>: RecordTableViewCell = self<span class="variable">.tableView</span><span class="variable">.dequeueReusableCellWithIdentifier</span>(identifier) as! RecordTableViewCell</div><div class="line">    </div><div class="line">    cell<span class="variable">.backgroundColor</span> = UIColor<span class="variable">.clearColor</span>()</div><div class="line"> </div><div class="line">    cell<span class="variable">.deleteBtn</span><span class="variable">.tag</span> = indexPath<span class="variable">.row</span></div><div class="line">    </div><div class="line">    cell<span class="variable">.deleteBtn</span><span class="variable">.addTarget</span>(self, action: #selector(RecordViewController<span class="variable">.deleteBtnClick</span>(_:)), forControlEvents: UIControlEvents<span class="variable">.TouchUpInside</span>)</div><div class="line">    return cell</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  //deleteBtn响应方法</div><div class="line">  func deleteBtnClick(sender: UIButton) &#123;</div><div class="line">    dataSourceArr<span class="variable">.removeAtIndex</span>(sender<span class="variable">.tag</span>)</div><div class="line">    tableView<span class="variable">.reloadData</span>()</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><font color="OrangeRed" size="5">总结:</font><br><br>代码自定义cell要注意cell下子控件的创建及frame约束等.这里只是提供一个思路,抛砖引玉,具体的需求具体对待.</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/16/Swift-从零开始-15-自定义tableViewCell及自定义cell删除按钮/" class="archive-article-date">
+  	<time datetime="2016-12-16T06:04:50.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-16</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tableViewCell/">tableViewCell</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Swift-从零开始-14-构造器的继承和重写" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -331,7 +384,13 @@
       
         <font color="OrangeRed" size="4">1.设置电池栏</font>
 
-<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">didFinishLaunchingWithOptions</span>: </div><div class="line"></div><div class="line"><span class="objectivec"><span class="comment">//MARK :-设置电池栏(状态栏)</span></span></div><div class="line">    <span class="comment">//设置颜色</span></div><div class="line">    application.statusBarStyle = <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">    <span class="comment">//启动时隐藏</span></div><div class="line">    application.statusBarHidden = <span class="literal">NO</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">didFinishLaunchingWithOptions</span>: </div><div class="line"></div><div class="line"><span class="objectivec"><span class="comment">//MARK :-设置电池栏(状态栏)</span></span></div><div class="line">    <span class="comment">//设置颜色(亮色/白色)</span></div><div class="line">    application.statusBarStyle = <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">    <span class="comment">//启动时隐藏</span></div><div class="line">    application.statusBarHidden = <span class="literal">NO</span>;</div></pre></td></tr></table></figure>
+<font color="OrangeRed" size="3">iOS7开始状态栏的设置权交给了当前界面</font>
+
+<p>隐藏状态栏</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">BOOL</span>)prefersStatusBarHidden &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改状态栏的颜色</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
@@ -706,65 +765,6 @@
 
 
   
-    <article id="post-Swift-从零开始-06_断言" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Swift-从零开始-06_断言/">Swift 从零开始 06_断言</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><font color="orangered">断言 : 保证某个条件一定是满足的,如果不满足,就直接崩溃,只在开发调试时有效</font>
-
-
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAssert(<span class="name">self</span>.finishedBlock != <span class="literal">nil</span>, @<span class="string">"图片下载完成的回调(finishedBlock)不能为空"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续执行。这时，你可以在你的代码中触发一个断言（assertion）来结束代码运行并通过调试来找到值缺失的原因。</p>
-<h3 id="使用断言进行调试"><a href="#使用断言进行调试" class="headerlink" title="使用断言进行调试"></a>使用断言进行调试</h3><p>断言会在运行时判断一个逻辑条件是否为true。从字面意思来说，断言“断言”一个条件是否为真。你可以使用断言来保证在运行其他代码之前，某些重要的条件已经被满足。如果条件判断为true，代码运行会继续进行；如果条件判断为false，代码运行停止，你的应用被终止。</p>
-<p>如果你的代码在调试环境下触发了一个断言，比如你在 Xcode 中构建并运行一个应用，你可以清楚地看到不合法的状态发生在哪里并检查断言被触发时你的应用的状态。此外，断言允许你附加一条调试信息。</p>
-<p>你可以使用全局assert函数来写一个断言。向assert函数传入一个结果为true或者false的表达式以及一条信息，当表达式为false的时候这条信息会被显示：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let age = -<span class="number">3</span></div><div class="line"><span class="function"><span class="title">assert</span><span class="params">(age &gt;= <span class="number">0</span>, <span class="string">"A person's age cannot be less than zero"</span>)</span></span></div><div class="line"><span class="comment">// 因为 age &lt; 0，所以断言会触发</span></div></pre></td></tr></table></figure>
-<p>在这个例子中，只有age &gt;= 0为true的时候，即age的值非负的时候，代码运行才会继续。如果age的值是负数，就像代码中那样，age &gt;= 0为false，断言被触发，结束应用。</p>
-<p>断言信息如果不需要，可以被省略，就像这样：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">assert</span><span class="params">(age &gt;= <span class="number">0</span>)</span></span></div></pre></td></tr></table></figure>
-<h3 id="何时使用断言"><a href="#何时使用断言" class="headerlink" title="何时使用断言"></a>何时使用断言</h3><p>当条件可能为假时使用断言，但是最终一定要保证条件为真，这样你的代码才能继续运行。断言的适用情景：</p>
-<p>整数类型的下标索引被传入一个自定义下标脚本实现，但是下标索引值可能太小或者太大。<br>需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。<br>一个可选值现在是nil，但是后面的代码运行需要一个非nil值。<br>请参考下标脚本和函数。</p>
-<p>注意：<br>断言可能导致你的应用终止运行，所以你应当仔细设计你的代码来让非法条件不会出现。然而，在你的应用发布之前，有时候非法条件可能出现，这时使用断言可以快速发现问题。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Swift-从零开始-06_断言/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:28:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -835,7 +835,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift-h5交互/" style="font-size: 10px;">swift h5交互</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
+    				<a href="/tags/App启动/" style="font-size: 10px;">App启动</a> <a href="/tags/as关键字/" style="font-size: 10px;">as关键字</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/swift-h5交互/" style="font-size: 10px;">swift h5交互</a> <a href="/tags/swift3-0/" style="font-size: 10px;">swift3.0</a> <a href="/tags/tableViewCell/" style="font-size: 10px;">tableViewCell</a> <a href="/tags/沙盒-下载/" style="font-size: 10px;">沙盒 下载</a>
     			</div>
     	</section>
     
